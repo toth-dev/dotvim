@@ -16,3 +16,6 @@
 [submodule "bundle/nova.vim"]
 	path = bundle/nova.vim
 	url = git@github.com:zanglg/nova.vim.git
+[submodule "bundle/vimtex"]
+	path = bundle/vimtex
+	url = https://github.com/lervag/vimtex

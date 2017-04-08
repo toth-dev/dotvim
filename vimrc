@@ -42,7 +42,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=0
 set smartindent
-set smarttab " experimental
+set smarttab  " experimental
 set shiftround
 set expandtab
 set autoindent
@@ -72,7 +72,7 @@ autocmd FileType latex,tex,md,markdown setlocal textwidth=72
 
 autocmd FileType gitcommit setlocal textwidth=72 spell
 
-autocmd FileType sh setlocal formatoptions-=t " do not hard break long lines
+autocmd FileType sh setlocal formatoptions-=t  " do not hard break long lines
 
 " show partial commands in the last line of the screen
 set showcmd
