@@ -19,3 +19,6 @@
 [submodule "bundle/vimtex"]
 	path = bundle/vimtex
 	url = https://github.com/lervag/vimtex
+[submodule "bundle/vim-solarized8"]
+	path = bundle/vim-solarized8
+	url = git@github.com:lifepillar/vim-solarized8.git

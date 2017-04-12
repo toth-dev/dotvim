@@ -110,6 +110,13 @@ if has('termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
+if &term =~ '256color'
+    " Disable Background Color Erase (BCE) so that color schemes work properly
+    " when Vim is used inside tmux and GNU screen. From:
+    " https://superuser.com/a/588243
+    set t_ut=
+endif
+
 
 " reset all highlighting to the defaults
 highlight clear
@@ -123,7 +130,8 @@ let g:gruvbox_improved_strings=0
 
 
 "colorscheme nova
-colorscheme solarized
+"colorscheme solarized
+colorscheme solarized8_dark
 
 highlight IncSearch term=inverse,undercurl cterm=bold ctermfg=16 ctermbg=130
         \ guibg=#af5f00
@@ -147,7 +155,7 @@ highlight DiffDelete cterm=none ctermfg=10 ctermbg=17
 highlight DiffChange cterm=none ctermfg=10 ctermbg=17
 highlight DiffText   cterm=none ctermfg=10 ctermbg=88
 
-highlight ColorColumn term=reverse cterm=bold ctermbg=1 ctermfg=7
+"highlight ColorColumn term=reverse cterm=bold ctermbg=1 ctermfg=7
 
 highlight clear MatchParen
 highlight MatchParen term=reverse cterm=reverse,underline
