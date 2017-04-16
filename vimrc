@@ -58,7 +58,7 @@ autocmd BufRead,BufNewFile .bash_login set filetype=sh
 syntax on
 
 " automatically reload vimrc when it's saved
-autocmd BufWritePost .vimrc sleep 300m | source ~/.vimrc
+autocmd BufWritePost .vimrc,vimrc sleep 250m | source $MYVIMRC
 
 if has('syntax') && version >= 700
     set spelllang=en,hu
@@ -83,6 +83,78 @@ set showmode
 
 " remove splash screen
 set shortmess+=I
+
+" instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+
+" when there is a previous search pattern, highlight all its matches.
+set hlsearch
+
+" while typing a search command, show where the pattern, as it was typed
+" so far, matches.
+set incsearch
+" use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+
+" this makes Vim break text to avoid lines getting longer than 80 characters.
+" (not just visually, inserts <EOL>)
+set textwidth=80
+
+" vertical ruler
+if exists('+colorcolumn')
+    set colorcolumn=+1  " after textwidth
+    "set colorcolumn=81
+endif
+
+" visually wrap long lines
+set wrap
+if has('linebreak')
+    " Vim will wrap long lines at a character in 'breakat' rather than at the
+    " last character (only affects how the text is displayed)
+    set linebreak
+
+    if exists('+breakindent')
+        " every wrapped line will continue visually indented
+        set breakindent
+        set breakindentopt=min:25
+    end
+
+    " string to put at the start of lines that have been wrapped
+    "set showbreak=~~~\ 
+    set showbreak=↪\ 
+end
+
+if exists('+virtualedit')
+    " virtual editing means that the cursor can be positioned where there is no
+    " actual character.  This can be halfway into a tab or beyond the line end.
+    "   block   Allow virtual editing in Visual block mode.
+    "   insert  Allow virtual editing in Insert mode.
+    "   all     Allow virtual editing in all modes.
+    "   onemore Allow the cursor to move just past the end of the line
+    set virtualedit=all
+    "set virtualedit=block,onemore
+endif
+
+" set the command window height to 2 lines, to avoid many cases of having to
+" "press <Enter> to continue"
+set cmdheight=2
+
+" do not unload abandoned buffers
+set hidden
+
+" Behavior when switching buffers (:sbuffer, :cc)
+"     useopen   Jump to the first open window that contains the specified
+"               buffer
+"     usetab    Same for tabs
+"     split     If included, split the current window before loading a buffer
+"               for a quickfix command that display errors.
+"               Otherwise: do not split, use current window.
+set switchbuf=useopen,usetab,split
+
+" put swap files in a central directory instead of the current dir
+set directory=~/.vim/swap//,.
 
 
 " ~~~~~~~~~~~~~~
@@ -171,7 +243,7 @@ highlight Error ctermbg=Red ctermfg=White
 " White
 
 highlight clear SpellBad
-highlight SpellBad cterm=underline ctermbg=160 gui=underline,bold
+highlight SpellBad cterm=underline gui=underline,bold
 
 if v:version > 700
     "set cursorline
@@ -206,77 +278,6 @@ set statusline+=%-6(%c%V%)                  " column number(s)
 set statusline+=%1*%3P%*                    " percentage
 
 
-" instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
-
-" when there is a previous search pattern, highlight all its matches.
-set hlsearch
-
-" while typing a search command, show where the pattern, as it was typed
-" so far, matches.
-set incsearch
-" use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
-
-" this makes Vim break text to avoid lines getting longer than 80 characters.
-" (not just visually, inserts <EOL>)
-set textwidth=80
-
-" vertical ruler
-if exists('+colorcolumn')
-    set colorcolumn=+1  " after textwidth
-    "set colorcolumn=81
-endif
-
-if exists('+virtualedit')
-    " virtual editing means that the cursor can be positioned where there is no
-    " actual character.  This can be halfway into a tab or beyond the line end.
-    "   block   Allow virtual editing in Visual block mode.
-    "   insert  Allow virtual editing in Insert mode.
-    "   all     Allow virtual editing in all modes.
-    "   onemore Allow the cursor to move just past the end of the line
-    set virtualedit=all
-    "set virtualedit=block,onemore
-endif
-
-" visually wrap long lines
-set wrap
-if has('linebreak')
-    " Vim will wrap long lines at a character in 'breakat' rather than at the
-    " last character (only affects how the text is displayed)
-    set linebreak
-
-    if exists('+breakindent')
-        " every wrapped line will continue visually indented
-        set breakindent
-        set breakindentopt=min:25
-    end
-
-    " string to put at the start of lines that have been wrapped
-    "set showbreak=~~~\ 
-    set showbreak=↪\ 
-end
-
-" set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
-set cmdheight=2
-
-" do not unload abandoned buffers
-set hidden
-
-" Behavior when switching buffers (:sbuffer, :cc)
-"     useopen   Jump to the first open window that contains the specified
-"               buffer
-"     usetab    Same for tabs
-"     split     If included, split the current window before loading a buffer
-"               for a quickfix command that display errors.
-"               Otherwise: do not split, use current window.
-set switchbuf=useopen,usetab,split
-
-" put swap files in a central directory instead of the current dir
-set directory=~/.vim/swap//,.
 
 " ~~~~~~~~~~~~~~~
 " ~~ FUNCTIONS ~~
@@ -307,7 +308,7 @@ function! ColorDemo()
 
 command! TrimWS call TrimWS()
 command! ColorDemo new +call\ ColorDemo()
-command! Rc source ~/.vimrc
+command! Rc source $MYVIMRC
 
 " :w!! command saves current file with sudo, useful when changes were made in
 " read-only mode
