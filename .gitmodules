@@ -22,3 +22,6 @@
 [submodule "bundle/vim-solarized8"]
 	path = bundle/vim-solarized8
 	url = git@github.com:lifepillar/vim-solarized8.git
+[submodule "bundle/vim-wwdc16-theme"]
+	path = bundle/vim-wwdc16-theme
+	url = git@github.com:lifepillar/vim-wwdc16-theme.git

@@ -55,6 +55,7 @@ autocmd!
 
 filetype plugin indent on
 autocmd BufRead,BufNewFile .bash_login set filetype=sh
+syntax clear
 syntax on
 
 " automatically reload vimrc when it's saved
@@ -65,6 +66,14 @@ if has('syntax') && version >= 700
 endif
 
 let g:tex_flavor='latex'
+
+let g:gitgutter_eager = 1
+let g:gitgutter_override_sign_column_highlight = 0
+
+let g:html_number_lines = 1
+let g:html_line_ids = 1
+let g:html_prevent_copy = "fn"
+let g:html_use_css = 1
 
 autocmd FileType latex,tex,md,markdown setlocal spell
 autocmd FileType latex,tex,md,markdown setlocal formatoptions=tcroqb1an
@@ -234,9 +243,16 @@ highlight MatchParen term=reverse cterm=reverse,underline
 "underline
 
 " change line number column style
-highlight LineNr term=bold ctermfg=254 ctermbg=236
-    \ guifg=#000000 guibg=#a4a4a4
+"highlight LineNr term=bold ctermfg=254 ctermbg=236
+"    \ guifg=#000000 guibg=#a4a4a4
 " cterm=none
+"highlight LineNr term=underline ctermfg=10 ctermbg=0
+"    \ guifg=#586e75 guibg=#000000
+
+highlight CursorLineNr term=reverse cterm=NONE gui=NONE guibg=#052731
+"guibg=#073642
+
+"highlight! link SignColumn LineNr
 
 "highlight Error ctermbg=160 ctermfg=15
 highlight Error ctermbg=Red ctermfg=White
