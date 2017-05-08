@@ -68,6 +68,7 @@ endif
 let g:tex_flavor='latex'
 
 let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
 let g:gitgutter_override_sign_column_highlight = 0
 
 let g:html_number_lines = 1
@@ -175,7 +176,18 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = ['vim-latex-suite']
 
+silent call system('which git &> /dev/null')
+if v:shell_error != 0
+    call add(g:pathogen_disabled, 'vim-gitgutter')
+endif
+
 execute pathogen#infect()
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " ~~~~~~~~~~~~~
 " ~~ THEMING ~~
