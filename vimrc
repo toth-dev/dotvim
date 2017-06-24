@@ -68,8 +68,9 @@ endif
 let g:tex_flavor='latex'
 
 let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 1
+let g:gitgutter_realtime = 0
 let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_diff_args = '-w'
 
 let g:html_number_lines = 1
 let g:html_line_ids = 1
@@ -166,6 +167,16 @@ set switchbuf=useopen,usetab,split
 " put swap files in a central directory instead of the current dir
 set directory=~/.vim/swap//,.
 
+set undofile
+set undodir=~/.vim/swap//,.
+
+if has('title') && &t_ts != ''
+    set title
+
+    "auto BufEnter * let &titlestring = hostname() . "/" . expand("%:p")
+    set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
+endif
+
 
 " ~~~~~~~~~~~~~~
 " ~~ PATHOGEN ~~
@@ -223,8 +234,9 @@ let g:gruvbox_improved_strings=0
 
 
 "colorscheme nova
-"colorscheme solarized
-colorscheme solarized8_dark
+"colorscheme solarized8_dark
+colorscheme wwdc16
+"colorscheme spring-night
 
 highlight IncSearch term=inverse,undercurl cterm=bold ctermfg=16 ctermbg=130
         \ guibg=#af5f00
@@ -290,7 +302,7 @@ set laststatus=2
 set statusline=%1*%n)%*                     " buffer number
 set statusline+=%<%F                        " filename
 set statusline+=%2*%m                       " modified flag (red)
-set statusline+=%1*[%Y%H%W]%k%a             " file type + flags
+set statusline+=%#LineNr#[%Y%H%W]%k%a       " file type + flags
 set statusline+=[%{&fenc!=''?&fenc:&enc},   " encoding
 set statusline+=%{&ff}]                     " file format
 set statusline+=%2*%{&paste=='0'?'':'[paste]'}%*
