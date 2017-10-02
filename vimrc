@@ -167,8 +167,7 @@ set switchbuf=useopen,usetab,split
 " put swap files in a central directory instead of the current dir
 set directory=~/.vim/swap//,.
 
-set undofile
-set undodir=~/.vim/swap//,.
+set undofile undodir=~/.vim/undodir//,.
 
 if has('title') && &t_ts != ''
     set title
