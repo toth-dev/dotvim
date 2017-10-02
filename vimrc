@@ -191,6 +191,9 @@ if v:shell_error != 0
     call add(g:pathogen_disabled, 'vim-gitgutter')
 endif
 
+let g:airline_powerline_fonts = 1
+set timeoutlen=10
+
 execute pathogen#infect()
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -295,26 +298,28 @@ endif
 " ~~ STATUS LINE ~~
 " ~~~~~~~~~~~~~~~~~
 
-" always display the status line, even if only one window is displayed
-set laststatus=2
-" set special statusline, format:
-set statusline=%1*%n)%*                     " buffer number
-set statusline+=%<%F                        " filename
-set statusline+=%2*%m                       " modified flag (red)
-set statusline+=%#LineNr#[%Y%H%W]%k%a       " file type + flags
-set statusline+=[%{&fenc!=''?&fenc:&enc},   " encoding
-set statusline+=%{&ff}]                     " file format
-set statusline+=%2*%{&paste=='0'?'':'[paste]'}%*
-                                            " paste mode on?
-set statusline+=%2*%r%*                     " read-only flag (red)
-set statusline+=%2*%{$USER=='root'?'[root]':''}%*
-                                            " run as root?
-set statusline+=%=                          " separator between left & right
-"set statusline+=[Ch=%-3b\ 0x%04B]           " character under cursor
-set statusline+=%3*[C=%3b]%*                " character under cursor
-set statusline+=%8(%l/%L%),\                " line number
-set statusline+=%-6(%c%V%)                  " column number(s)
-set statusline+=%1*%3P%*                    " percentage
+if (!exists('g:loaded_airline') || !g:loaded_airline)
+    " always display the status line, even if only one window is displayed
+    set laststatus=2
+    " set special statusline, format:
+    set statusline=%1*%n)%*                     " buffer number
+    set statusline+=%<%F                        " filename
+    set statusline+=%2*%m                       " modified flag (red)
+    set statusline+=%#LineNr#[%Y%H%W]%k%a       " file type + flags
+    set statusline+=[%{&fenc!=''?&fenc:&enc},   " encoding
+    set statusline+=%{&ff}]                     " file format
+    set statusline+=%2*%{&paste=='0'?'':'[paste]'}%*
+                                                " paste mode on?
+    set statusline+=%2*%r%*                     " read-only flag (red)
+    set statusline+=%2*%{$USER=='root'?'[root]':''}%*
+                                                " run as root?
+    set statusline+=%=                          " separator between left & right
+    "set statusline+=[Ch=%-3b\ 0x%04B]           " character under cursor
+    set statusline+=%3*[C=%3b]%*                " character under cursor
+    set statusline+=%8(%l/%L%),\                " line number
+    set statusline+=%-6(%c%V%)                  " column number(s)
+    set statusline+=%1*%3P%*                    " percentage
+endif
 
 
 
