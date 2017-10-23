@@ -184,7 +184,7 @@ endif
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " To disable a plugin, add it's bundle name to the following list
-let g:pathogen_disabled = ['vim-latex-suite']
+let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline']
 
 silent call system('which git &> /dev/null')
 if v:shell_error != 0
@@ -427,6 +427,8 @@ noremap   <Right>  <NOP>
 " move between displayed lines, important when lines are visually wrapped
 noremap j gj
 noremap k gk
+inoremap <buffer> <silent> <Up>   <C-o>gk
+inoremap <buffer> <silent> <Down> <C-o>gj
 "noremap h gh
 "noremap l gl
 
