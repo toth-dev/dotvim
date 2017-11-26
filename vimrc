@@ -4,6 +4,13 @@
 
 set number
 set numberwidth=3
+
+" default config for windows
+if has('win32') && filereadable($VIM . '/_vimrc')
+    source $VIM/_vimrc
+endif
+
+
 " line numbers are absolute by default, unless you’re moving around in normal
 " mode
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
@@ -27,7 +34,7 @@ set history=1000
 set scrolloff=4
 set sidescrolloff=10
 
-" reload files changed outside vim
+" reload files changed outside Vim (only when there are no local changes)
 set autoread
 
 
@@ -41,8 +48,8 @@ set list listchars=tab:»\ ,trail:¶,extends:>,precedes:<
 set tabstop=4
 set shiftwidth=4
 set softtabstop=0
-set smartindent
-set smarttab  " experimental
+"set smartindent
+set smarttab
 set shiftround
 set expandtab
 set autoindent
@@ -165,15 +172,33 @@ set hidden
 set switchbuf=useopen,usetab,split
 
 " put swap files in a central directory instead of the current dir
-set directory=~/.vim/swap//,.
+if has('win32') || has ('win64')
+    let $VIMHOME = $VIM."/vimfiles"
+else
+    let $VIMHOME = $HOME."/.vim"
+endif
 
-set undofile undodir=~/.vim/undodir//,.
+let &directory=$VIMHOME . "/swap//,."
+"set directory=~/.vim/swap//,.
+
+"set undofile undodir=~/.vim/undodir//,.
+set undofile
+let &undodir=$VIMHOME . "/undodir//,."
+set undolevels=1200  " default is 1000
 
 if has('title') && &t_ts != ''
     set title
 
     "auto BufEnter * let &titlestring = hostname() . "/" . expand("%:p")
     set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
+endif
+
+if has('gui_running')
+    if has('win32')
+        set guifont=Hack:h11:cEASTEUROPE
+    elseif has('unix')
+        set guifont=Hack\ 10
+    endif
 endif
 
 
@@ -186,15 +211,21 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline']
 
-silent call system('which git &> /dev/null')
-if v:shell_error != 0
-    call add(g:pathogen_disabled, 'vim-gitgutter')
+if 1
+    if has('win32')
+        call add(g:pathogen_disabled, 'vim-gitgutter')
+    else
+        silent call system('which git &> /dev/null')
+        if v:shell_error != 0
+            call add(g:pathogen_disabled, 'vim-gitgutter')
+        endif
+    endif
+
+    let g:airline_powerline_fonts = 1
+    set timeoutlen=10
+
+    execute pathogen#infect()
 endif
-
-let g:airline_powerline_fonts = 1
-set timeoutlen=10
-
-execute pathogen#infect()
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -229,10 +260,12 @@ highlight clear
 
 set background=dark
 
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_improved_warnings=1
-let g:gruvbox_improved_strings=0
+if 1
+    let g:gruvbox_italic=1
+    let g:gruvbox_contrast_dark='hard'
+    let g:gruvbox_improved_warnings=1
+    let g:gruvbox_improved_strings=0
+endif
 
 
 "colorscheme nova
@@ -331,7 +364,7 @@ endif
 function! TrimWS()
   %s/\s*$//
   ''
-:endfunction
+endfunction
 
 " display the 256 available xterm background and foreground colors
 function! ColorDemo()
@@ -348,7 +381,7 @@ function! ColorDemo()
         call append(0, 'ctermbg1='.num.': ctermbg2='.num.': ctermfg1='.num.': ctermfg2='.num.':')
         let num = num - 1
     endwhile
-:endfunction
+endfunction
 
 command! TrimWS call TrimWS()
 command! ColorDemo new +call\ ColorDemo()
@@ -357,7 +390,7 @@ command! Rc source $MYVIMRC
 " :w!! command saves current file with sudo, useful when changes were made in
 " read-only mode
 " http://www.jovicailic.org/2015/05/saving-read-only-files-in-vim-sudo-trick/
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 if $USER !=# 'root' && exists('+secure')
     " enable .vimrc in current directory
@@ -433,14 +466,14 @@ inoremap <buffer> <silent> <Down> <C-o>gj
 "noremap l gl
 
 " make mappings
-" map <F5> :make<CR><CR>:cwindow 8<CR>
+" noremap <F5> :make<CR><CR>:cwindow 8<CR>
 
 " save, run `make`, open quickfix window and jump to first error
-map <F5> :w<CR>:make<CR><CR>:cwindow 5<CR>:cc<CR>
-map! <F5> <ESC>:w<CR>:make<CR><CR>:cwindow 5<CR>:cc<CR>
+noremap <F5> :w<CR>:make<CR><CR>:cwindow 5<CR>:cc<CR>
+noremap! <F5> <ESC>:w<CR>:make<CR><CR>:cwindow 5<CR>:cc<CR>
 " jump to next/previous error
-map <F6> :cn<CR>
-map <F7> :cp<CR>
+noremap <F6> :cn<CR>
+noremap <F7> :cp<CR>
 
 " toggle options
 noremap <F2> :set paste! paste?<CR>
