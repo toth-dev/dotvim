@@ -12,6 +12,9 @@ autocmd!
 if has('win32') && filereadable($VIM . '/_vimrc')
     source $VIM/_vimrc
 endif
+if has('+shellslash')
+    set shellslash
+endif
 
 
 " line numbers are absolute by default, unless you’re moving around in normal
@@ -173,7 +176,7 @@ set switchbuf=useopen,usetab,split
 
 " put swap files in a central directory instead of the current dir
 if has('win32') || has ('win64')
-    let $VIMHOME = $VIM."/vimfiles"
+    let $VIMHOME = $HOME."/vimfiles"
 else
     let $VIMHOME = $HOME."/.vim"
 endif
