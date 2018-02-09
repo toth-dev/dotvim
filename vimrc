@@ -5,6 +5,9 @@
 set number
 set numberwidth=3
 
+" remove ALL autocommands for the current group.
+autocmd!
+
 " default config for windows
 if has('win32') && filereadable($VIM . '/_vimrc')
     source $VIM/_vimrc
@@ -56,9 +59,6 @@ set autoindent
 
 set formatoptions+=n      " support for numbered/bullet lists
 set formatoptions+=l      " only break lines that were not longer than 'tw'
-
-" remove ALL autocommands for the current group.
-autocmd!
 
 filetype plugin indent on
 autocmd BufRead,BufNewFile .bash_login set filetype=sh
@@ -201,6 +201,8 @@ if has('gui_running')
     endif
 endif
 
+let mapleader = ","
+let g:mkdx#map_prefix = '<leader>'
 
 " ~~~~~~~~~~~~~~
 " ~~ PATHOGEN ~~
@@ -221,8 +223,8 @@ if 1
         endif
     endif
 
-    let g:airline_powerline_fonts = 1
-    set timeoutlen=10
+    "let g:airline_powerline_fonts = 1
+    "set timeoutlen=10
 
     execute pathogen#infect()
 endif
