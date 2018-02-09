@@ -58,3 +58,6 @@
 	path = bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 	branch = master
+[submodule "bundle/mkdx"]
+	path = bundle/mkdx
+	url = https://github.com/SidOfc/mkdx.git
