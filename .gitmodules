@@ -4,7 +4,7 @@
 	branch = master
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
+	url = https://github.com/altercation/vim-colors-solarized.git
 	branch = master
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
@@ -20,7 +20,7 @@
 	branch = master
 [submodule "bundle/nova.vim"]
 	path = bundle/nova.vim
-	url =  https.//github.com/lifepillar/vim-wwdc16-theme.git
+	url =  https://github.com/lifepillar/vim-wwdc16-theme.git
 	branch = master
 [submodule "bundle/vimtex"]
 	path = bundle/vimtex
