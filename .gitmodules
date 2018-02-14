@@ -8,7 +8,7 @@
 	branch = master
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
+	url = https://github.com/airblade/vim-gitgutter.git
 	branch = master
 [submodule "bundle/vim-latex-suite"]
 	path = bundle/vim-latex-suite
@@ -20,7 +20,7 @@
 	branch = master
 [submodule "bundle/nova.vim"]
 	path = bundle/nova.vim
-	url = git@github.com:zanglg/nova.vim.git
+	url =  https.//github.com/lifepillar/vim-wwdc16-theme.git
 	branch = master
 [submodule "bundle/vimtex"]
 	path = bundle/vimtex
@@ -28,11 +28,11 @@
 	branch = master
 [submodule "bundle/vim-solarized8"]
 	path = bundle/vim-solarized8
-	url = git@github.com:lifepillar/vim-solarized8.git
+    url = https://github.com/lifepillar/vim-solarized8.git
 	branch = master
 [submodule "bundle/vim-wwdc16-theme"]
 	path = bundle/vim-wwdc16-theme
-	url = git@github.com:lifepillar/vim-wwdc16-theme.git
+	url = https://github.com/lifepillar/vim-wwdc16-theme.git
 	branch = master
 [submodule "bundle/vim-searchindex"]
 	path = bundle/vim-searchindex
