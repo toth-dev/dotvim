@@ -2,8 +2,10 @@
 " ~~ BEHAVIOR ~~
 " ~~~~~~~~~~~~~~
 
+" { ASD
 set number
 set numberwidth=3
+" }
 
 " remove ALL autocommands for the current group.
 autocmd!
@@ -88,7 +90,8 @@ let g:html_prevent_copy = "fn"
 let g:html_use_css = 1
 
 autocmd FileType latex,tex,md,markdown setlocal spell
-autocmd FileType latex,tex,md,markdown setlocal formatoptions=tcroqb1an
+"autocmd FileType latex,tex,md,markdown setlocal formatoptions=tcroqb1anj
+autocmd FileType latex,tex,md,markdown setlocal formatoptions=roj
 autocmd FileType latex,tex,md,markdown setlocal textwidth=72
 
 autocmd FileType gitcommit setlocal textwidth=72 spell
@@ -470,6 +473,11 @@ inoremap <buffer> <silent> <Down> <C-o>gj
 "noremap h gh
 "noremap l gl
 
+" insert newline above or below (like o and O, but stays in normal mode)
+" http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
+nnoremap <SPACE> msO<Esc>`s
+nnoremap <CR>    mso<Esc>`s
+
 " make mappings
 " noremap <F5> :make<CR><CR>:cwindow 8<CR>
 
@@ -488,3 +496,5 @@ noremap <F3> :set spell! spell?<CR>
 noremap! <F3> <C-O>:set spell! spell?<CR>
 " stop highlighting search matches
 noremap <F4> :nohlsearch<CR>
+
+" vim:  foldmethod=marker foldmarker={,}
