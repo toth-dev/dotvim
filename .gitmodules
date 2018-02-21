@@ -20,7 +20,7 @@
 	branch = master
 [submodule "bundle/nova.vim"]
 	path = bundle/nova.vim
-	url =  https://github.com/lifepillar/vim-wwdc16-theme.git
+	url =  https://github.com/zanglg/nova.vim.git
 	branch = master
 [submodule "bundle/vimtex"]
 	path = bundle/vimtex
