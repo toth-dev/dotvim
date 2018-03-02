@@ -200,7 +200,7 @@ if has('title') && &t_ts != ''
     set title
 
     "auto BufEnter * let &titlestring = hostname() . "/" . expand("%:p")
-    set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
+    set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)\ %{hostname()}
 endif
 
 if has('gui_running')
