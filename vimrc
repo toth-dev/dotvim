@@ -7,6 +7,8 @@ set number
 set numberwidth=3
 " }
 
+set nocompatible
+
 " remove ALL autocommands for the current group.
 autocmd!
 
@@ -187,9 +189,11 @@ endif
 let &directory=$VIMHOME . "/swap//,."
 "set directory=~/.vim/swap//,.
 
-"set undofile undodir=~/.vim/undodir//,.
-set undofile
-let &undodir=$VIMHOME . "/undodir//,."
+if has('persistent_undo')
+    "set undofile undodir=~/.vim/undodir//,.
+    set undofile
+    let &undodir=$VIMHOME . "/undodir//,."
+endif
 set undolevels=1200  " default is 1000
 
 if has('title') && &t_ts != ''
@@ -219,13 +223,21 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline']
 
+if hostname() == 'ural2'
+    let g:pathogen_disabled = [ 'gruvbox', 'mkdx', 'sslsecure.vim', 'vim-airline', 'vim-color-spring-night', 'vim-easy-align', 'vim-fugitive', 'vim-gitgutter', 'vim-latex-suite', 'vimtex', 'vim-wwdc16-theme']
+
+    " 'nova.vim', 'vim-searchindex', 'vim-solarized8'
+endif
+
 if 1
     if has('win32')
         call add(g:pathogen_disabled, 'vim-gitgutter')
+        call add(g:pathogen_disabled, 'vim-fugitive')
     else
         silent call system('which git &> /dev/null')
         if v:shell_error != 0
             call add(g:pathogen_disabled, 'vim-gitgutter')
+            call add(g:pathogen_disabled, 'vim-fugitive')
         endif
     endif
 
@@ -277,9 +289,12 @@ endif
 
 
 "colorscheme nova
-"colorscheme solarized8_dark
-colorscheme wwdc16
 "colorscheme spring-night
+if hostname() == 'ural2'
+    colorscheme solarized8_dark
+else
+    colorscheme wwdc16
+endif
 
 highlight IncSearch term=inverse,undercurl cterm=bold ctermfg=16 ctermbg=130
         \ guibg=#af5f00
@@ -295,7 +310,7 @@ highlight User3 term=inverse,bold ctermfg=15 ctermbg=238
         \ guibg=#555555                     " character under cursor
 
 highlight SpecialKey guifg=#D57AF4
-	" original: #455A64
+    " original: #455A64
 
 " change diff highlighting
 highlight DiffAdd    cterm=none ctermfg=10 ctermbg=17
