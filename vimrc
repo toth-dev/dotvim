@@ -12,6 +12,11 @@ set nocompatible
 " remove ALL autocommands for the current group.
 autocmd!
 
+if has('gui_running')
+    set langmenu=none
+    language en
+endif
+
 " default config for windows
 if has('win32') && filereadable($VIM . '/_vimrc')
     source $VIM/_vimrc
@@ -206,6 +211,7 @@ endif
 if has('gui_running')
     if has('win32')
         set guifont=Hack:h11:cEASTEUROPE
+        set visualbell
     elseif has('unix')
         set guifont=Hack\ 10
     endif
