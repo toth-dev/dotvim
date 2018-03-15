@@ -219,6 +219,8 @@ endif
 
 let mapleader = ","
 let g:mkdx#map_prefix = '<leader>'
+let g:mkdx#settings = { 'highlight': { 'enable': 1 } }
+
 
 " ~~~~~~~~~~~~~~
 " ~~ PATHOGEN ~~
@@ -415,6 +417,7 @@ endfunction
 command! TrimWS call TrimWS()
 command! ColorDemo new +call\ ColorDemo()
 command! Rc source $MYVIMRC
+command! ERc edit $MYVIMRC
 
 " :w!! command saves current file with sudo, useful when changes were made in
 " read-only mode
