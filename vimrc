@@ -39,7 +39,7 @@ endif
 if exists('+relativenumber')
     set relativenumber
     autocmd InsertEnter * :set norelativenumber
-    autocmd InsertLeave * :set relativenumber
+    autocmd InsertLeave * :let &relativenumber=&number
 endif
 
 " enable use of the mouse for all modes
@@ -214,9 +214,13 @@ if !has('gui_running') && exists("$TMUX") && empty(&t_ts)
     let &t_fs = "\007"
 endif
 
-if has('title') && &t_ts != ''
+if has('title') && has('statusline') && &t_ts != ''
     set title
-    set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)\ %{hostname()}
+
+    "auto BufEnter * let &titlestring = hostname() . "/" . expand("%:p")
+    set titlestring=%t%(\ %{&ro?'=':''}%M%)  " filename, readonly, modified
+    set titlestring+=\ (%{expand(\"%:~:h\")}@%{hostname()})%(\ %a%)
+        " path, hostname, argument list status (X of Y)
 endif
 
 if has('gui_running')
