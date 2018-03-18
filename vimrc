@@ -188,7 +188,7 @@ set hidden
 "               Otherwise: do not split, use current window.
 set switchbuf=useopen,usetab,split
 
-" put swap files in a central directory instead of the current dir
+" put swap and undo files in a central directory instead of the current dir
 if has('win32') || has ('win64')
     let $VIMHOME = $HOME."/vimfiles"
 else
@@ -196,10 +196,10 @@ else
 endif
 
 let &directory=$VIMHOME . "/swap//,."
-"set directory=~/.vim/swap//,.
+
+set swapfile updatecount=30
 
 if has('persistent_undo')
-    "set undofile undodir=~/.vim/undodir//,.
     set undofile
     let &undodir=$VIMHOME . "/undodir//,."
 endif
@@ -207,14 +207,12 @@ set undolevels=1200  " default is 1000
 
 if has('title') && &t_ts != ''
     set title
-
-    "auto BufEnter * let &titlestring = hostname() . "/" . expand("%:p")
     set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)\ %{hostname()}
 endif
 
 if has('gui_running')
     if has('win32')
-        set guifont=Hack:h11:cEASTEUROPE
+        set guifont=Hack:h10:cEASTEUROPE
         set visualbell
     elseif has('unix')
         set guifont=Hack\ 10
@@ -366,7 +364,7 @@ endif
 " ~~ STATUS LINE ~~
 " ~~~~~~~~~~~~~~~~~
 
-if (!exists('g:loaded_airline') || !g:loaded_airline)
+if !exists('g:loaded_airline') || !g:loaded_airline
     " always display the status line, even if only one window is displayed
     set laststatus=2
     " set special statusline, format:
@@ -374,9 +372,20 @@ if (!exists('g:loaded_airline') || !g:loaded_airline)
     set statusline+=%<%F                        " filename
     set statusline+=%2*%m                       " modified flag (red)
     set statusline+=%#LineNr#[%Y%H%W]%k%a       " file type + flags
-    set statusline+=[%{&fenc!=''?&fenc:&enc},   " encoding
+    function! GetStatusLineEnc()
+        let l:enc = &fenc!='' ? &fenc : &enc
+        if l:enc == 'utf-8'
+            let l:enc = ''
+        else
+            let l:enc = l:enc . ','
+        endif
+        return l:enc
+    endfunction
+    "set statusline+=[%{substitute(&fenc!=''?&fenc:&enc,'^utf-8$','','')}
+    set statusline+=[%{GetStatusLineEnc()}
+                                                " encoding
     set statusline+=%{&ff}]                     " file format
-    set statusline+=%2*%{&paste=='0'?'':'[paste]'}%*
+    set statusline+=%2*%{&paste?'':'[paste]'}%*
                                                 " paste mode on?
     set statusline+=%2*%r%*                     " read-only flag (red)
     set statusline+=%2*%{$USER=='root'?'[root]':''}%*
