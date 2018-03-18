@@ -2,10 +2,10 @@
 " ~~ BEHAVIOR ~~
 " ~~~~~~~~~~~~~~
 
-" { ASD
+" {{ ASD
 set number
 set numberwidth=3
-" }
+" }}
 
 set nocompatible
 
@@ -20,6 +20,9 @@ if has('gui_running')
         language en_US.UTF-8
     endif
 endif
+
+" reset all highlighting to the defaults
+"highlight clear
 
 " default config for windows
 if has('win32') && filereadable($VIM . '/_vimrc')
@@ -82,7 +85,7 @@ syntax clear
 syntax on
 
 " automatically reload vimrc when it's saved
-autocmd BufWritePost .vimrc,vimrc sleep 250m | source $MYVIMRC
+autocmd BufWritePost .vimrc,vimrc sleep 150m | source $MYVIMRC
 
 if has('syntax') && version >= 700
     set spelllang=en,hu
@@ -92,7 +95,7 @@ let g:tex_flavor='latex'
 
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 0
-let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_override_sign_column_highlight = 1
 let g:gitgutter_diff_args = '-w'
 
 let g:html_number_lines = 1
@@ -257,6 +260,8 @@ if 1
     execute pathogen#infect()
 endif
 
+set timeout timeoutlen=1500 ttimeoutlen=100
+
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -285,8 +290,6 @@ if &term =~ '256color'
 endif
 
 
-" reset all highlighting to the defaults
-highlight clear
 
 set background=dark
 
@@ -534,4 +537,8 @@ noremap! <F3> <C-O>:set spell! spell?<CR>
 " stop highlighting search matches
 noremap <F4> :nohlsearch<CR>
 
-" vim:  foldmethod=marker foldmarker={,}
+" needed becouse sourcing vimrc again makes the sign column
+call gitgutter#highlight#define_sign_column_highlight()
+call gitgutter#highlight#define_highlights()
+
+" vim:  foldmethod=marker foldmarker={{,}}
