@@ -14,7 +14,11 @@ autocmd!
 
 if has('gui_running')
     set langmenu=none
-    language en
+    if has('win32')
+        language en
+    else
+        language en_US.UTF-8
+    endif
 endif
 
 " default config for windows
