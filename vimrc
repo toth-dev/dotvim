@@ -208,6 +208,12 @@ if has('persistent_undo')
 endif
 set undolevels=1200  " default is 1000
 
+if !has('gui_running') && exists("$TMUX") && empty(&t_ts)
+    " enable displaying title in TMUX
+    let &t_ts = "\e]2;"
+    let &t_fs = "\007"
+endif
+
 if has('title') && &t_ts != ''
     set title
     set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)\ %{hostname()}
@@ -290,6 +296,17 @@ if &term =~ '256color'
 endif
 
 
+" set cursor based on mode: bar in insert mode, block otherwise
+if exists('$TMUX')
+    "let &t_SI = "\ePtmux;\e\e[5 q\e\\"
+    "let &t_EI = "\ePtmux;\e\e[1 q\e\\"
+    let &t_SI = "\<ESC>Ptmux;\e\e[5 q\e\\"
+    let &t_EI = "\<ESC>Ptmux;\e\e[1 q\e\\"
+    set ttimeoutlen=20
+elseif &term =~ "xterm"
+    let &t_SI = "\e[5 q"
+    let &t_EI = "\e[1 q"
+endif
 
 set background=dark
 
