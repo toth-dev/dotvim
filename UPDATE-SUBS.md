@@ -1,9 +1,12 @@
 Add fork of mkxd (in `bundle/mkdx/`):
 ```bash
 git remote add fork git@github.com:totpet/mkdx.git
+git checkout master
+git pull fork master
 ```
 
-You can update submodules to the latest version (even if their remote has changed) with these commands:
+You can update submodules to the latest version (even if their remote
+address has changed) with these commands:
 
 ```bash
 git submodule sync
@@ -14,4 +17,13 @@ To fix broken submodule branches (HEAD detached), use:
 ```bash
 git submodule foreach git checkout -f master
 git submodule foreach git pull --rebase
+```
+
+If you don't want to update submodules on every fetch/pull (even when
+there is a new commit referenced), put this in your `~/.gitconfig` or
+`.git/config`:
+
+```gitconfig
+[fetch]
+    recurseSubmodules = false
 ```
