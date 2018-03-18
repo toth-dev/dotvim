@@ -1,3 +1,8 @@
+Add fork of mkxd (in `bundle/mkdx/`):
+```bash
+git remote add fork git@github.com:totpet/mkdx.git
+```
+
 You can update submodules to the latest version (even if their remote has changed) with these commands:
 
 ```bash
