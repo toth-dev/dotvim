@@ -160,8 +160,8 @@ if has('linebreak')
     end
 
     " string to put at the start of lines that have been wrapped
-    "set showbreak=~~~\ 
-    set showbreak=↪\ 
+    "let &showbreak = "~~~ "
+    let &showbreak = "↪ "
 end
 
 if exists('+virtualedit')
