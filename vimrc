@@ -409,7 +409,7 @@ if !exists('g:loaded_airline') || !g:loaded_airline
     set statusline+=[%{GetStatusLineEnc()}
                                                 " encoding
     set statusline+=%{&ff}]                     " file format
-    set statusline+=%2*%{&paste?'':'[paste]'}%*
+    set statusline+=%2*%{&paste?'[paste]':''}%*
                                                 " paste mode on?
     set statusline+=%2*%r%*                     " read-only flag (red)
     set statusline+=%2*%{$USER=='root'?'[root]':''}%*
@@ -559,7 +559,9 @@ noremap! <F3> <C-O>:set spell! spell?<CR>
 noremap <F4> :nohlsearch<CR>
 
 " needed becouse sourcing vimrc again makes the sign column
-call gitgutter#highlight#define_sign_column_highlight()
-call gitgutter#highlight#define_highlights()
+if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
+    call gitgutter#highlight#define_sign_column_highlight()
+    call gitgutter#highlight#define_highlights()
+endif
 
 " vim:  foldmethod=marker foldmarker={{,}}
