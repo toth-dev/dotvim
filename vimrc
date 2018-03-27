@@ -343,8 +343,10 @@ highlight User2 term=inverse,bold cterm=bold ctermfg=16 ctermbg=160
 highlight User3 term=inverse,bold ctermfg=15 ctermbg=238
         \ guibg=#555555                     " character under cursor
 
-highlight SpecialKey guifg=#D57AF4
+highlight SpecialKey cterm=bold gui=bold guifg=#D57AF4
     " original: #455A64
+" use it for line overflow marks and 'showbreak' too:
+set highlight+=@:SpecialKey
 
 " change diff highlighting
 highlight DiffAdd    cterm=none ctermfg=10 ctermbg=17
