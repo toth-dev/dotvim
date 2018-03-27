@@ -2,12 +2,12 @@
 " ~~ BEHAVIOR ~~
 " ~~~~~~~~~~~~~~
 
+set nocompatible
+
 " {{ ASD
 set number
 set numberwidth=3
 " }}
-
-set nocompatible
 
 " remove ALL autocommands for the current group.
 autocmd!
