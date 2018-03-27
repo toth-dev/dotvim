@@ -1,63 +1,95 @@
 [submodule "bundle/gruvbox"]
-	path = bundle/gruvbox
-	url = https://github.com/morhetz/gruvbox.git
-	branch = master
+    path = bundle/gruvbox
+    url = https://github.com/morhetz/gruvbox.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-colors-solarized"]
-	path = bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-	branch = master
+    path = bundle/vim-colors-solarized
+    url = https://github.com/altercation/vim-colors-solarized.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-	branch = master
+    path = bundle/vim-gitgutter
+    url = https://github.com/airblade/vim-gitgutter.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-latex-suite"]
-	path = bundle/vim-latex-suite
-	url = https://github.com/gerw/vim-latex-suite
-	branch = master
+    path = bundle/vim-latex-suite
+    url = https://github.com/gerw/vim-latex-suite
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-pathogen"]
-	path = bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
-	branch = master
+    path = bundle/vim-pathogen
+    url = https://github.com/tpope/vim-pathogen.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/nova.vim"]
-	path = bundle/nova.vim
-	url =  https://github.com/zanglg/nova.vim.git
-	branch = master
+    path = bundle/nova.vim
+    url =  https://github.com/zanglg/nova.vim.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vimtex"]
-	path = bundle/vimtex
-	url = https://github.com/lervag/vimtex
-	branch = master
+    path = bundle/vimtex
+    url = https://github.com/lervag/vimtex
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-solarized8"]
-	path = bundle/vim-solarized8
+    path = bundle/vim-solarized8
     url = https://github.com/lifepillar/vim-solarized8.git
-	branch = master
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-wwdc16-theme"]
-	path = bundle/vim-wwdc16-theme
-	url = https://github.com/lifepillar/vim-wwdc16-theme.git
-	branch = master
+    path = bundle/vim-wwdc16-theme
+    url = https://github.com/lifepillar/vim-wwdc16-theme.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-searchindex"]
-	path = bundle/vim-searchindex
-	url = https://github.com/google/vim-searchindex.git
-	branch = master
+    path = bundle/vim-searchindex
+    url = https://github.com/google/vim-searchindex.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/sslsecure.vim"]
-	path = bundle/sslsecure.vim
-	url = https://github.com/chr4/sslsecure.vim.git
-	branch = master
+    path = bundle/sslsecure.vim
+    url = https://github.com/chr4/sslsecure.vim.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-easy-align"]
-	path = bundle/vim-easy-align
-	url = https://github.com/junegunn/vim-easy-align.git
-	branch = master
+    path = bundle/vim-easy-align
+    url = https://github.com/junegunn/vim-easy-align.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-color-spring-night"]
-	path = bundle/vim-color-spring-night
-	url = https://github.com/rhysd/vim-color-spring-night
-	branch = master
+    path = bundle/vim-color-spring-night
+    url = https://github.com/rhysd/vim-color-spring-night
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-airline"]
-	path = bundle/vim-airline
-	url = https://github.com/vim-airline/vim-airline.git
-	branch = master
+    path = bundle/vim-airline
+    url = https://github.com/vim-airline/vim-airline.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/vim-fugitive"]
-	path = bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-	branch = master
+    path = bundle/vim-fugitive
+    url = https://github.com/tpope/vim-fugitive.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/mkdx"]
-	path = bundle/mkdx
-	url = https://github.com/SidOfc/mkdx.git
+    path = bundle/mkdx
+    url = https://github.com/SidOfc/mkdx.git
+    branch = master
+    update = rebase
