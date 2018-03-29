@@ -210,8 +210,15 @@ set undolevels=1200  " default is 1000
 
 if !has('gui_running') && exists("$TMUX") && empty(&t_ts)
     " enable displaying title in TMUX
+    "set t_ts=k
+    "set t_ts=k
+    "set t_fs=\
+    "set t_ts=]2
+    "set t_fs=\\
     let &t_ts = "\e]2;"
     let &t_fs = "\007"
+    "set t_ZH=[3m
+    "set t_ZR=[23m
 endif
 
 if has('title') && has('statusline') && &t_ts != ''
@@ -299,17 +306,24 @@ if &term =~ '256color'
     set t_ut=
 endif
 
+let g:color_cursor = 0
+if g:color_cursor
+    "&term =~ "xterm"
+    let &t_SI = "\<Esc>]12;purple\x7"
+    let &t_SR = "\<Esc>]12;red\x7"
+    let &t_EI = "\<Esc>]12;blue\x7"
+endif
 
 " set cursor based on mode: bar in insert mode, block otherwise
 if exists('$TMUX')
     "let &t_SI = "\ePtmux;\e\e[5 q\e\\"
     "let &t_EI = "\ePtmux;\e\e[1 q\e\\"
-    let &t_SI = "\<ESC>Ptmux;\e\e[5 q\e\\"
-    let &t_EI = "\<ESC>Ptmux;\e\e[1 q\e\\"
+    let &t_SI = &t_SI . "\<ESC>Ptmux;\e\e[5 q\e\\"
+    let &t_EI = &t_EI . "\<ESC>Ptmux;\e\e[1 q\e\\"
     set ttimeoutlen=20
 elseif &term =~ "xterm"
-    let &t_SI = "\e[5 q"
-    let &t_EI = "\e[1 q"
+    let &t_SI = &t_SI . "\e[5 q"
+    let &t_EI = &t_EI . "\e[1 q"
 endif
 
 set background=dark
