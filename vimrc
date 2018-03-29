@@ -326,6 +326,15 @@ elseif &term =~ "xterm"
     let &t_EI = &t_EI . "\e[1 q"
 endif
 
+" make striketrough work in TMUX
+if exists('$TMUX')
+    " in .tmux.conf:
+    " set -as terminal-overrides ',xterm-256color:Tc:smxx=\E[9m'
+    let &t_Te = "\e[29m"
+    let &t_Ts = "\e[9m"
+endif
+
+
 set background=dark
 
 if 1
