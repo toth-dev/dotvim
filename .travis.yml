@@ -9,7 +9,10 @@ addons:
     packages:
       - vim
       - vim-gtk
+      - vim-athena
       - xvfb
+      - libgtk2.0-dev
+      - libgtk-3-dev
 
 env:
   global:
@@ -17,28 +20,37 @@ env:
 
 before_script: |
   git clone --depth 1 https://github.com/junegunn/vader.vim.git
+  export PATH="/usr/local/bin:$PATH"
   export DISPLAY=:99.0
+  export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/
   sh -e /etc/init.d/xvfb start
   Xvfb :21 -screen 0 1024x768x24 +extension RANDR &
   eval $(dbus-launch --sh-syntax);
-  sleep 3
   #
   #
+  sudo apt-get build-dep vim-gtk2 vim vim-gtk3 vim-athena
+  mkdir local
+  DIR=$(pwd)/local
+  export PATH="$DIR/bin:$PATH"
   git clone --depth 1 https://github.com/vim/vim.git
   cd vim
   # ./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp
-  ./configure --with-features=huge --enable-gui=gtk3
+  ./configure --with-features=huge --enable-gui=athena --prefix=$DIR --disable-gtktest
   make
   sudo make install
   cd -
 
 
 script: |
+  echo $PATH
+  type -a vim
+  type -a gvim
   gvim --version
+  vim --version
   gvim vimrc -c "runtime! synatax/2html.vim | TOhtml | w | qa"
 
 deploy:
-  file: vimrc.html
+  file: "vimrc.html"
   skip_cleanup: true
 
 # vim: set ts=2 sw=2 :
