@@ -1,0 +1,10 @@
+language: vim
+
+before_script: |
+  git clone --depth 1 https://github.com/junegunn/vader.vim.git
+
+script: |
+  gvim vimrc -c "runtime! synatax/2html.vim | TOhtml | w | qa"
+
+deploy:
+    files: vimrc.html
