@@ -24,7 +24,7 @@ before_script: |
   sleep 3
   #
   #
-  hg clone https://code.google.com/p/vim/
+  git clone --depth 1 https://github.com/vim/vim.git
   cd vim
   # ./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp
   ./configure --with-features=huge --enable-gui=gtk3
