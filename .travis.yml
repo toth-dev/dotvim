@@ -13,8 +13,12 @@ addons:
 before_script: |
   git clone --depth 1 https://github.com/junegunn/vader.vim.git
   export DISPLAY=:99.0
+  export NO_AT_BRIDGE=1
+  eval $(dbus-launch --sh-syntax);
+  sleep 3
   sh -e /etc/init.d/xvfb start
   sleep 3
+
 
 script: |
   gvim vimrc -c "runtime! synatax/2html.vim | TOhtml | w | qa"
