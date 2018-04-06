@@ -90,6 +90,6 @@
     update = rebase
 [submodule "bundle/mkdx"]
     path = bundle/mkdx
-    url = https://github.com/SidOfc/mkdx.git
+    url = https://github.com/totpet/mkdx.git
     branch = master
     update = rebase
