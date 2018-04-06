@@ -4,6 +4,12 @@ git:
     depth: 3
     submodules: true
 
+addons:
+  apt:
+    packages:
+      - vim
+      - vim-gtk
+
 before_script: |
   git clone --depth 1 https://github.com/junegunn/vader.vim.git
 
