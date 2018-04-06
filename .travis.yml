@@ -22,6 +22,15 @@ before_script: |
   Xvfb :21 -screen 0 1024x768x24 +extension RANDR &
   eval $(dbus-launch --sh-syntax);
   sleep 3
+  #
+  #
+  hg clone https://code.google.com/p/vim/
+  cd vim
+  # ./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp
+  ./configure --with-features=huge --enable-gui=gtk3
+  make
+  sudo make install
+  cd -
 
 
 script: |
