@@ -47,7 +47,7 @@ script: |
   type -a gvim
   gvim --version
   vim --version
-  gvim vimrc -c "runtime! synatax/2html.vim | TOhtml | w | qa"
+  echo | gvim vimrc -c "runtime! synatax/2html.vim | TOhtml | w | qa"
 
 deploy:
   file: "vimrc.html"

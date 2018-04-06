@@ -240,7 +240,11 @@ if has('gui_running')
         set guifont=Hack:h10:cEASTEUROPE
         set visualbell
     elseif has('unix')
-        set guifont=Hack\ 10
+        if !has('gui_athena')
+            set guifont=Hack\ 10
+        else
+            set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+        endif
     endif
 endif
 
