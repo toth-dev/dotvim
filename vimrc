@@ -191,14 +191,19 @@ set hidden
 "               Otherwise: do not split, use current window.
 set switchbuf=useopen,usetab,split
 
-" put swap and undo files in a central directory instead of the current dir
+" put backup, swap and undo files in a central directory instead of the current
+" dir
 if has('win32') || has ('win64')
     let $VIMHOME = $HOME."/vimfiles"
 else
     let $VIMHOME = $HOME."/.vim"
 endif
 
-let &directory=$VIMHOME . "/swap//,."
+let &directory=$VIMHOME . "/swap//, ., ~//, ~/tmp"
+let &backupdir=$VIMHOME . "/swap/, ., ~/tmp, ~/"
+
+" remove backup after the file was successful written
+set nobackup writebackup
 
 set swapfile updatecount=30
 
@@ -480,6 +485,10 @@ command! TrimWS call TrimWS()
 command! ColorDemo new +call\ ColorDemo()
 command! Rc source $MYVIMRC
 command! ERc edit $MYVIMRC
+
+" user command (named R) to allow easy capture of output in a scratch buffer
+" http://vim.wikia.com/wiki/Append_output_of_an_external_command
+command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 
 " :w!! command saves current file with sudo, useful when changes were made in
 " read-only mode
