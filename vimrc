@@ -588,9 +588,10 @@ noremap <F2> :set paste! paste?<CR>
 set pastetoggle=<F2> " for insert mode
 
 noremap <F3> :set spell! spell?<CR>
-noremap! <F3> <C-O>:set spell! spell?<CR>
+inoremap <F3> <C-O>:set spell! spell?<CR>
 " stop highlighting search matches
 noremap <F4> :nohlsearch<CR>
+inoremap <F4> <C-O>:nohlsearch<CR>
 
 " needed becouse sourcing vimrc again makes the sign column
 if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
