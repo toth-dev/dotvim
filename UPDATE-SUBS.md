@@ -1,4 +1,6 @@
-Add fork of mkxd (in `bundle/mkdx/`):
+# Submodules
+
+Add fork of mkxd (in `bundle/mkdx`):
 ```bash
 git remote add fork git@github.com:totpet/mkdx.git
 git checkout master
@@ -26,4 +28,18 @@ there is a new commit referenced), put this in your `~/.gitconfig` or
 ```gitconfig
 [fetch]
     recurseSubmodules = false
+```
+
+# Public branch
+
+I want to publish the repository without its history, so I created
+a `pub` orphan branch and update it:
+
+```bash
+git checkout --orphan pub
+git commit -m"Inital commit"
+git push -f origin pub
+
+git checkout master
+git branch -D pub
 ```

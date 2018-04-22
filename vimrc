@@ -464,8 +464,10 @@ endif
 
 " remove trailing spaces
 function! TrimWS()
-  %s/\s*$//
-  ''
+    mark '
+    " e flag: do not show error when there is nothing to replace
+    %s/\s\s*$//e
+    normal g`'
 endfunction
 
 " display the 256 available xterm background and foreground colors
@@ -489,6 +491,12 @@ command! TrimWS call TrimWS()
 command! ColorDemo new +call\ ColorDemo()
 command! Rc source $MYVIMRC
 command! ERc edit $MYVIMRC
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+    \ | wincmd p | diffthis
 
 " user command (named R) to allow easy capture of output in a scratch buffer
 " http://vim.wikia.com/wiki/Append_output_of_an_external_command
@@ -534,10 +542,9 @@ set laststatus=2
 " substitution), 0 means always report
 set report=0
 
-" when on, splitting a window will put the new window below the current one.
-set splitbelow
-" when on, splitting a window will put the new window right of the current one.
-set splitright
+" when on, splitting a window will put the new window below and right to the
+" current one.
+set splitbelow splitright
 
 " stop certain movements from always going to the first character of a line.
 set nostartofline
@@ -592,9 +599,10 @@ noremap <F2> :set paste! paste?<CR>
 set pastetoggle=<F2> " for insert mode
 
 noremap <F3> :set spell! spell?<CR>
-noremap! <F3> <C-O>:set spell! spell?<CR>
+inoremap <F3> <C-O>:set spell! spell?<CR>
 " stop highlighting search matches
 noremap <F4> :nohlsearch<CR>
+inoremap <F4> <C-O>:nohlsearch<CR>
 
 " needed becouse sourcing vimrc again makes the sign column
 if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
