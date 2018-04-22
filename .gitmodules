@@ -1,3 +1,9 @@
+[submodule "bundle/mkdx"]
+    path = bundle/mkdx
+    url = https://github.com/totpet/mkdx.git
+    branch = master
+    update = rebase
+    shallow = true
 [submodule "bundle/gruvbox"]
     path = bundle/gruvbox
     url = https://github.com/morhetz/gruvbox.git
@@ -87,9 +93,4 @@
     url = https://github.com/tpope/vim-fugitive.git
     branch = master
     shallow = true
-    update = rebase
-[submodule "bundle/mkdx"]
-    path = bundle/mkdx
-    url = https://github.com/totpet/mkdx.git
-    branch = master
     update = rebase
