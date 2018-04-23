@@ -25,6 +25,7 @@ stuff:
     - export PATH="$DIR/bin:$PATH"
     - pwd
     - sed -i 's/if has("gui_running")/if has("gui_running") || \&termguicolors/' /usr/share/vim/vim80/runtime/syntax/2html.vim || true
+    - find /usr/share/vim -name '*2html.vim' || true
     - ln -s $(pwd) ~/.vim
     - ls -lA
     - ls -lA ~
@@ -34,10 +35,10 @@ stuff:
     - >
       echo -e '\nq' | vim vimrc
       -c 'set bg=dark | color wwdc16 | redir @a | echo $VIMRUNTIME | color | set termguicolors? | set bg?  | redir END | 0put a'
-      -c "set bg=dark | let g:html_no_progress=1 |  runtime! synatax/2html.vim | TOhtml | w! | qa!";
+      -c "set bg=dark | let g:html_no_progress=1 |  runtime! syntax/2html.vim | TOhtml | w! | qa!";
       #echo -e '\nq' | xvfb-run --auto-servernum gvim vimrc
       #-c "set bg=dark | color wwdc16 | redir @a | color | set termguicolors? | set bg?  | redir END | 0put a"
-      #-c "set bg=dark | let g:html_no_progress=1 |  runtime! synatax/2html.vim | TOhtml | w! vimrc2.html | qa!";
+      #-c "set bg=dark | let g:html_no_progress=1 |  runtime! syntax/2html.vim | TOhtml | w! vimrc2.html | qa!";
 
       #--cmd "set termguicolors"
       #- echo -e '\nq' | gvim -R vimrc -c "set termguicolors | runtime! synatax/2html.vim | TOhtml | w! | qa!"
