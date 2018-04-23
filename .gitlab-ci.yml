@@ -24,7 +24,7 @@ stuff:
     - DIR=$(pwd)/local
     - export PATH="$DIR/bin:$PATH"
     - pwd
-    - sed -i 's/if has("gui_running")/if has("gui_running") || \&termguicolors/' /usr/share/vim/vim80/runtime/syntax/2html.vim || true
+    - sed -i 's/if has("gui_running")/if has("gui_running") || \&termguicolors/' /usr/share/vim/vim80/syntax/2html.vim || true
     - find /usr/share/vim -name '*2html.vim' || true
     - ln -s $(pwd) ~/.vim
     - ls -lA
