@@ -34,8 +34,8 @@ stuff:
     - rm -fv vimrc.html
     - >
       echo -e '\nq' | vim vimrc
-      -c 'set bg=dark | color wwdc16 | redir @a | echo $VIMRUNTIME | color | set termguicolors? | set bg?  | redir END | 0put a'
-      -c "set bg=dark | let g:html_no_progress=1 |  runtime! syntax/2html.vim | w! | TOhtml | w! | qa!";
+      -c 'set bg=dark | color wwdc16 | redir @a | echo $VIMRUNTIME | color | set termguicolors? | set bg?  | redir END | 0put a | 0,.norm I"'
+      -c "set bg=dark | let g:html_no_progress=1 |  runtime! syntax/2html.vim | w! | qa!";
     - touch vimrc.html
     - touch vimrc2.html
       #echo -e '\nq' | xvfb-run --auto-servernum gvim vimrc
