@@ -502,6 +502,9 @@ if $USER !=# 'root' && exists('+secure')
     set secure
 endif
 
+" the default encryption (zip) is weak
+set cryptmethod=blowfish2
+
 " if Vim is used as the pager, this is needed for the case when you start Vim
 " normally and want to use Vim's Man function
 " http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix
@@ -570,7 +573,9 @@ inoremap <buffer> <silent> <Down> <C-o>gj
 " insert newline above or below (like o and O, but stays in normal mode)
 " http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
 nnoremap <SPACE> msO<Esc>`s
-nnoremap <CR>    mso<Esc>`s
+" don't map it for QuickFix and command line (q:) windows
+"nnoremap <CR>    mso<Esc>`s
+autocmd BufRead,BufNew * if &bt == '' | nnoremap <buffer> <CR> mso<Esc>`s | endif
 
 " make mappings
 " noremap <F5> :make<CR><CR>:cwindow 8<CR>
@@ -589,8 +594,8 @@ set pastetoggle=<F2> " for insert mode
 noremap <F3> :set spell! spell?<CR>
 inoremap <F3> <C-O>:set spell! spell?<CR>
 " stop highlighting search matches
-noremap <F4> :nohlsearch<CR>
-inoremap <F4> <C-O>:nohlsearch<CR>
+noremap <silent> <F4> :nohlsearch<CR>
+inoremap <silent> <F4> <C-O>:nohlsearch<CR>
 
 " needed becouse sourcing vimrc again makes the sign column
 if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
