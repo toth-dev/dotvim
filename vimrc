@@ -93,10 +93,9 @@ endif
 
 let g:tex_flavor='latex'
 
-let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 0
 let g:gitgutter_override_sign_column_highlight = 1
-let g:gitgutter_diff_args = '-w'
+"let g:gitgutter_diff_args = '-w'
+"let g:gitgutter_highlight_lines = 0
 
 let g:html_number_lines = 1
 let g:html_line_ids = 1
@@ -205,7 +204,7 @@ let &backupdir=$VIMHOME . "/swap/, ., ~/tmp, ~/"
 " remove backup after the file was successful written
 set nobackup writebackup
 
-set swapfile updatecount=30
+set swapfile updatecount=40 updatetime=1500
 
 if has('persistent_undo')
     set undofile
@@ -215,15 +214,8 @@ set undolevels=1200  " default is 1000
 
 if !has('gui_running') && exists("$TMUX") && empty(&t_ts)
     " enable displaying title in TMUX
-    "set t_ts=k
-    "set t_ts=k
-    "set t_fs=\
-    "set t_ts=]2
-    "set t_fs=\\
     let &t_ts = "\e]2;"
     let &t_fs = "\007"
-    "set t_ZH=[3m
-    "set t_ZR=[23m
 endif
 
 if has('title') && has('statusline') && &t_ts != ''
