@@ -356,6 +356,8 @@ highlight Search    term=inverse,bold cterm=bold ctermfg=16 ctermbg=134
         \ guibg=#af31b6
 
 " status-line colors
+highlight StatusLineNC gui=inverse guibg=#000000
+"highlight StatusLineNC term=inverse cterm=inverse gui=bold guibg=#00ff00
 highlight User1 term=inverse,bold ctermfg=15 ctermbg=240
         \ gui=bold guibg=#333333            " buffer number
 highlight User2 term=inverse,bold cterm=bold ctermfg=16 ctermbg=160
@@ -438,7 +440,7 @@ if !exists('g:loaded_airline') || !g:loaded_airline
                                                 " run as root?
     set statusline+=%=                          " separator between left & right
     "set statusline+=[Ch=%-3b\ 0x%04B]           " character under cursor
-    set statusline+=%3*[C=%3b]%*                " character under cursor
+    set statusline+=%3*C=%3b%*\                 " character under cursor
     set statusline+=%8(%l/%L%),\                " line number
     set statusline+=%-6(%c%V%)                  " column number(s)
     set statusline+=%1*%3P%*                    " percentage
