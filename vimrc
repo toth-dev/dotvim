@@ -565,8 +565,8 @@ noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
 " move between displayed lines, important when lines are visually wrapped
-noremap j gj
-noremap k gk
+noremap <silent> j gj
+noremap <silent> k gk
 inoremap <buffer> <silent> <Up>   <C-o>gk
 inoremap <buffer> <silent> <Down> <C-o>gj
 "noremap h gh
