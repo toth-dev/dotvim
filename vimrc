@@ -412,7 +412,7 @@ endif
 " ~~ STATUS LINE ~~
 " ~~~~~~~~~~~~~~~~~
 
-if !exists('g:loaded_airline') || !g:loaded_airline
+if has('statusline') && (!exists('g:loaded_airline') || !g:loaded_airline)
     " always display the status line, even if only one window is displayed
     set laststatus=2
     " set special statusline, format:
@@ -424,15 +424,20 @@ if !exists('g:loaded_airline') || !g:loaded_airline
         let l:enc = &fenc!='' ? &fenc : &enc
         if l:enc == 'utf-8'
             let l:enc = ''
-        else
-            let l:enc = l:enc . ','
         endif
-        return l:enc
+
+        let l:ff = &ff != 'unix' ? &ff : ''
+
+        if l:enc == '' && l:ff == ''
+            return ''
+        elseif l:enc != '' && l:ff != ''
+            return '[' . l:enc . ',' . l:ff . ']'
+        else
+            return '[' . l:enc . l:ff . ']'
+        endif
     endfunction
     "set statusline+=[%{substitute(&fenc!=''?&fenc:&enc,'^utf-8$','','')}
-    set statusline+=[%{GetStatusLineEnc()}
-                                                " encoding
-    set statusline+=%{&ff}]                     " file format
+    set statusline+=%{GetStatusLineEnc()}       " encoding, fifeformat (EoL)
     set statusline+=%2*%{&paste?'[paste]':''}%*
                                                 " paste mode on?
     set statusline+=%2*%r%*                     " read-only flag (red)
