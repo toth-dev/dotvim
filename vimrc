@@ -9,17 +9,6 @@ set number
 set numberwidth=3
 " }}
 
-" remove ALL autocommands for the current group.
-autocmd!
-
-if has('gui_running')
-    set langmenu=none
-    if has('win32')
-        language en
-    else
-        language en_US.UTF-8
-    endif
-endif
 
 " reset all highlighting to the defaults
 "highlight clear
@@ -37,6 +26,11 @@ endif
 " mode
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
 if exists('+relativenumber')
+    set relativenumber
+    set relativenumber
+    set relativenumber
+    set relativenumber
+    set relativenumber
     set relativenumber
     autocmd InsertEnter * :set norelativenumber
     autocmd InsertLeave * :let &relativenumber=&number
