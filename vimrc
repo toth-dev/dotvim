@@ -2,7 +2,8 @@
 " ~~ BEHAVIOR ~~
 " ~~~~~~~~~~~~~~
 
-set nocompatible
+set encoding=utf-8
+scriptencoding utf-8
 
 " {{ ASD
 set number
@@ -60,7 +61,6 @@ set sidescrolloff=10
 set autoread
 
 
-set encoding=utf-8
 
 " display tabs and trailing blanks
 set list listchars=tab:»\ ,trail:¶,extends:>,precedes:<
@@ -87,7 +87,7 @@ syntax on
 " automatically reload vimrc when it's saved
 autocmd BufWritePost .vimrc,vimrc sleep 150m | source $MYVIMRC
 
-if has('syntax') && version >= 700
+if has('syntax') && v:version >= 700
     set spelllang=en,hu
 endif
 
@@ -99,7 +99,7 @@ let g:gitgutter_override_sign_column_highlight = 1
 
 let g:html_number_lines = 1
 let g:html_line_ids = 1
-let g:html_prevent_copy = "fn"
+let g:html_prevent_copy = 'fn'
 let g:html_use_css = 1
 
 autocmd FileType latex,tex,md,markdown setlocal spell
@@ -160,7 +160,7 @@ if has('linebreak')
 
     " string to put at the start of lines that have been wrapped
     "let &showbreak = "~~~ "
-    let &showbreak = "↪ "
+    let &showbreak = '↪ '
 end
 
 if exists('+virtualedit')
@@ -193,13 +193,13 @@ set switchbuf=useopen,usetab,split
 " put backup, swap and undo files in a central directory instead of the current
 " dir
 if has('win32') || has ('win64')
-    let $VIMHOME = $HOME."/vimfiles"
+    let $VIMHOME = $HOME . '/vimfiles'
 else
-    let $VIMHOME = $HOME."/.vim"
+    let $VIMHOME = $HOME . '/.vim'
 endif
 
-let &directory=$VIMHOME . "/swap//, ., ~//, ~/tmp"
-let &backupdir=$VIMHOME . "/swap/, ., ~/tmp, ~/"
+let &directory=$VIMHOME . '/swap//, ., ~//, ~/tmp'
+let &backupdir=$VIMHOME . '/swap/, ., ~/tmp, ~/'
 
 " remove backup after the file was successful written
 set nobackup writebackup
@@ -208,11 +208,11 @@ set swapfile updatecount=40 updatetime=1500
 
 if has('persistent_undo')
     set undofile
-    let &undodir=$VIMHOME . "/undodir//,."
+    let &undodir=$VIMHOME . '/undodir//,.'
 endif
 set undolevels=1200  " default is 1000
 
-if !has('gui_running') && exists("$TMUX") && empty(&t_ts)
+if !has('gui_running') && exists('$TMUX') && empty(&t_ts)
     " enable displaying title in TMUX
     let &t_ts = "\e]2;"
     let &t_fs = "\007"
@@ -236,7 +236,7 @@ if has('gui_running')
     endif
 endif
 
-let mapleader = ","
+let mapleader = ','
 let g:mkdx#map_prefix = '<leader>'
 let g:mkdx#settings = { 'highlight': { 'enable': 1 } }
 
@@ -318,7 +318,7 @@ if exists('$TMUX')
     let &t_SI = &t_SI . "\<ESC>Ptmux;\e\e[5 q\e\\"
     let &t_EI = &t_EI . "\<ESC>Ptmux;\e\e[1 q\e\\"
     set ttimeoutlen=20
-elseif &term =~ "xterm"
+elseif &term =~ 'xterm'
     let &t_SI = &t_SI . "\e[5 q"
     let &t_EI = &t_EI . "\e[1 q"
 endif
@@ -469,21 +469,23 @@ endfunction
 function! ColorDemo()
     let num = 255
     while num >= 0
-        exec 'hi col_bg1_'.num.' ctermbg='.num.' ctermfg=white'
-        exec 'hi col_bg2_'.num.' ctermbg='.num.' ctermfg=black'
-        exec 'hi col_fg1_'.num.' ctermbg=black ctermfg='.num
-        exec 'hi col_fg2_'.num.' ctermbg=white ctermfg='.num
-        exec 'syn match col_bg1_'.num.' "ctermbg1='.num.':" containedIn=ALL'
-        exec 'syn match col_bg2_'.num.' "ctermbg2='.num.':" containedIn=ALL'
-        exec 'syn match col_fg1_'.num.' "ctermfg1='.num.':" containedIn=ALL'
-        exec 'syn match col_fg2_'.num.' "ctermfg2='.num.':" containedIn=ALL'
-        call append(0, 'ctermbg1='.num.': ctermbg2='.num.': ctermfg1='.num.': ctermfg2='.num.':')
+        let nums = printf('%03d', num)
+        exec 'hi col_bg1_' . nums . ' ctermbg=' . nums . ' ctermfg=white'
+        exec 'hi col_bg2_' . nums . ' ctermbg=' . nums . ' ctermfg=black'
+        exec 'hi col_fg1_' . nums . ' ctermbg=black ctermfg=' . nums
+        exec 'hi col_fg2_' . nums . ' ctermbg=white ctermfg=' . nums
+        exec 'syn match col_bg1_' . nums . ' "ctermbg1=' . nums . ':" containedIn=ALL'
+        exec 'syn match col_bg2_' . nums . ' "ctermbg2=' . nums . ':" containedIn=ALL'
+        exec 'syn match col_fg1_' . nums . ' "ctermfg1=' . nums . ':" containedIn=ALL'
+        exec 'syn match col_fg2_' . nums . ' "ctermfg2=' . nums . ':" containedIn=ALL'
+        call append(0, 'ctermbg1=' . nums . ': ctermbg2=' . nums .
+            \ ': ctermfg1=' . nums . ': ctermfg2=' . nums . ':')
         let num = num - 1
     endwhile
 endfunction
 
 command! TrimWS call TrimWS()
-command! ColorDemo new +call\ ColorDemo()
+command! ColorDemo new +call\ ColorDemo()\ |\ set\ bt=nofile
 command! Rc source $MYVIMRC
 command! ERc edit $MYVIMRC
 
