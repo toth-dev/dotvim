@@ -63,7 +63,7 @@ set autoread
 
 
 " display tabs and trailing blanks
-set list listchars=tab:»\ ,trail:¶,extends:>,precedes:<
+set list listchars=tab:».,trail:¶,extends:>,precedes:<
 "set list listchars=tab:»\ ,trail:·
 "set list listchars=tab:>\ ,trail:$
 
@@ -605,6 +605,13 @@ inoremap <F3> <C-O>:set spell! spell?<CR>
 " stop highlighting search matches
 noremap <silent> <F4> :nohlsearch<CR>
 inoremap <silent> <F4> <C-O>:nohlsearch<CR>
+
+" http://vim.wikia.com/wiki/Search_for_visually_selected_text
+"vnoremap // y/\V<C-R>"<CR>
+"vnoremap <expr> // 'y/\V'.escape(@*,'\/').'<CR>'
+vnoremap <script> // "ty<SID>//
+nnoremap <expr> <SID>// '/\V'.escape(@t,'\/').'<CR>'
+
 
 " needed becouse sourcing vimrc again makes the sign column
 if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
