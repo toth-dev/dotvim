@@ -1,9 +1,9 @@
 [submodule "bundle/mkdx"]
     path = bundle/mkdx
-    url = https://github.com/totpet/mkdx.git
+    url = https://github.com/SidOfc/mkdx.git
     branch = master
-    update = rebase
     shallow = true
+    update = rebase
 [submodule "bundle/gruvbox"]
     path = bundle/gruvbox
     url = https://github.com/morhetz/gruvbox.git

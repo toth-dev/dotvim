@@ -1,4 +1,15 @@
+# TOC
+
+- [TOC](#toc)
+- [Submodules](#submodules)
+    - [MKDX](#mkdx)
+    - [Updating](#updating)
+- [Public branch](#public-branch)
+
 # Submodules
+
+
+## MKDX
 
 Add fork of mkxd (in `bundle/mkdx`):
 ```bash
@@ -6,6 +17,11 @@ git remote add fork git@github.com:totpet/mkdx.git
 git checkout master
 git pull fork master
 ```
+
+**UPDATE 2018-05:** this is no longer needed, changes is fork have been merged
+upstream
+
+## Updating
 
 You can update submodules to the latest version (even if their remote
 address has changed) with these commands:
