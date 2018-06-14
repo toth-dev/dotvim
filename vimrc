@@ -220,11 +220,13 @@ endif
 
 if has('title') && has('statusline') && &t_ts != ''
     set title
-
-    "auto BufEnter * let &titlestring = hostname() . "/" . expand("%:p")
-    set titlestring=%t%(\ %{&ro?'=':''}%M%)  " filename, readonly, modified
-    set titlestring+=\ (%{expand(\"%:~:h\")}@%{hostname()})%(\ %a%)
-        " path, hostname, argument list status (X of Y)
+    set titlestring=%t%(\ %{&ro?'=':''}%M%)      " filename, readonly, modified
+    set titlestring+=\ (%{expand(\"%:p:~:h\")})  " path
+    if exists('$SSH_CONNECTION') && !exists('$TMUX')
+        set titlestring+=@%{hostname()}          " hostname if inside SSH,
+                                                 " but not in TMUX
+    endif
+    set titlestring+=%(\ %a%) " path, hostname, argument list status (X of Y)
 endif
 
 if has('gui_running')
@@ -241,6 +243,12 @@ let g:mkdx#map_prefix = '<leader>'
 let g:mkdx#settings = { 'highlight': { 'enable': 1 } }
 
 
+" is it a slow system?
+if has('unix') && system('uname -m') !~? 'x86*'
+    set lazyredraw
+endif
+
+
 " ~~~~~~~~~~~~~~
 " ~~ PATHOGEN ~~
 " ~~~~~~~~~~~~~~
@@ -251,9 +259,9 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline']
 
 if hostname() == 'ural2'
-    let g:pathogen_disabled = [ 'gruvbox', 'mkdx', 'sslsecure.vim', 'vim-airline', 'vim-color-spring-night', 'vim-easy-align', 'vim-fugitive', 'vim-gitgutter', 'vim-latex-suite', 'vimtex', 'vim-wwdc16-theme']
+    let g:pathogen_disabled = [ 'gruvbox', 'sslsecure.vim', 'vim-airline', 'vim-color-spring-night', 'vim-easy-align', 'vim-fugitive', 'vim-gitgutter', 'vim-latex-suite', 'vimtex', 'vim-wwdc16-theme']
 
-    " 'nova.vim', 'vim-searchindex', 'vim-solarized8'
+    " 'mkdx', 'nova.vim', 'vim-searchindex', 'vim-solarized8'
 endif
 
 if 1
@@ -324,7 +332,7 @@ elseif &term =~ 'xterm'
 endif
 
 " make striketrough work in TMUX
-if exists('$TMUX')
+if exists('$TMUX') && exists('&t_Te')
     " in .tmux.conf:
     " set -as terminal-overrides ',xterm-256color:Tc:smxx=\E[9m'
     let &t_Te = "\e[29m"
@@ -353,7 +361,11 @@ endif
 highlight IncSearch term=inverse,undercurl cterm=bold ctermfg=16 ctermbg=130
         \ guibg=#af5f00
 highlight Search    term=inverse,bold cterm=bold ctermfg=16 ctermbg=134
-        \ guibg=#af31b6
+        \ guibg=#af0000
+        "\ guibg=#af31b6
+
+highlight Search guibg=Turquoise4 guifg=#ffffff
+
 
 " status-line colors
 highlight StatusLineNC gui=inverse guibg=#000000
@@ -461,7 +473,7 @@ endif
 function! TrimWS()
     mark '
     " e flag: do not show error when there is nothing to replace
-    %s/\s\s*$//e
+    %substitute/\s\s*$//e
     normal g`'
 endfunction
 
@@ -474,12 +486,17 @@ function! ColorDemo()
         exec 'hi col_bg2_' . nums . ' ctermbg=' . nums . ' ctermfg=black'
         exec 'hi col_fg1_' . nums . ' ctermbg=black ctermfg=' . nums
         exec 'hi col_fg2_' . nums . ' ctermbg=white ctermfg=' . nums
-        exec 'syn match col_bg1_' . nums . ' "ctermbg1=' . nums . ':" containedIn=ALL'
-        exec 'syn match col_bg2_' . nums . ' "ctermbg2=' . nums . ':" containedIn=ALL'
-        exec 'syn match col_fg1_' . nums . ' "ctermfg1=' . nums . ':" containedIn=ALL'
-        exec 'syn match col_fg2_' . nums . ' "ctermfg2=' . nums . ':" containedIn=ALL'
+        exec 'syn match col_bg1_' . nums . ' "ctermbg1=' . nums .
+                    \ ':" containedIn=ALL'
+        exec 'syn match col_bg2_' . nums . ' "ctermbg2=' . nums .
+                    \ ':" containedIn=ALL'
+        exec 'syn match col_fg1_' . nums . ' "ctermfg1=' . nums .
+                    \ ':" containedIn=ALL'
+        exec 'syn match col_fg2_' . nums . ' "ctermfg2=' . nums .
+                    \ ':" containedIn=ALL'
+
         call append(0, 'ctermbg1=' . nums . ': ctermbg2=' . nums .
-            \ ': ctermfg1=' . nums . ': ctermfg2=' . nums . ':')
+                    \ ': ctermfg1=' . nums . ': ctermfg2=' . nums . ':')
         let num = num - 1
     endwhile
 endfunction
@@ -584,7 +601,7 @@ inoremap <buffer> <silent> <Down> <C-o>gj
 nnoremap <SPACE> msO<Esc>`s
 " don't map it for QuickFix and command line (q:) windows
 "nnoremap <CR>    mso<Esc>`s
-autocmd BufRead,BufNew * if &bt == '' | nnoremap <buffer> <CR> mso<Esc>`s | endif
+autocmd BufRead,BufNew * if &bt == '' | nnoremap <buffer> <CR> mso<Esc>`sh | endif
 
 " make mappings
 " noremap <F5> :make<CR><CR>:cwindow 8<CR>
