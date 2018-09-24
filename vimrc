@@ -227,6 +227,7 @@ if has('title') && has('statusline') && &t_ts != ''
                                                  " but not in TMUX
     endif
     set titlestring+=%(\ %a%) " path, hostname, argument list status (X of Y)
+    set titlestring+=%< " truncate at the end
 endif
 
 if has('gui_running')
@@ -240,8 +241,12 @@ endif
 
 let mapleader = ','
 let g:mkdx#map_prefix = '<leader>'
-let g:mkdx#settings = { 'highlight': { 'enable': 1 } }
+let g:mkdx#settings = {
+            \ 'highlight': { 'enable': 1 },
+            \ 'toc': { 'text': 'Table of Contents' }
+            \ }
 
+"g:mkdx#settings.toc.text
 
 " is it a slow system?
 if has('unix') && system('uname -m') !~? 'x86*'
@@ -509,8 +514,8 @@ command! ERc edit $MYVIMRC
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-    \ | wincmd p | diffthis
+command! DiffOrig let _ft=&ft | vert new | set bt=nofile | let &ft=_ft | r # |
+    \ 0d_ | diffthis | wincmd p | diffthis
 
 " user command (named R) to allow easy capture of output in a scratch buffer
 " http://vim.wikia.com/wiki/Append_output_of_an_external_command
@@ -591,6 +596,8 @@ noremap   <Right>  <NOP>
 " move between displayed lines, important when lines are visually wrapped
 noremap <silent> j gj
 noremap <silent> k gk
+noremap <silent> gj j
+noremap <silent> gk k
 inoremap <buffer> <silent> <Up>   <C-o>gk
 inoremap <buffer> <silent> <Down> <C-o>gj
 "noremap h gh
@@ -617,8 +624,8 @@ noremap <F7> :cp<CR>
 noremap <F2> :set paste! paste?<CR>
 set pastetoggle=<F2> " for insert mode
 
-noremap <F3> :set spell! spell?<CR>
-inoremap <F3> <C-O>:set spell! spell?<CR>
+noremap <silent> <F3> :set spell! spell?<CR>
+inoremap <silent> <F3> <C-O>:set spell! spell?<CR>
 " stop highlighting search matches
 noremap <silent> <F4> :nohlsearch<CR>
 inoremap <silent> <F4> <C-O>:nohlsearch<CR>
