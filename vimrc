@@ -363,8 +363,8 @@ else
     colorscheme wwdc16
 endif
 
-highlight IncSearch term=inverse,undercurl cterm=bold ctermfg=16 ctermbg=130
-        \ guibg=#af5f00
+highlight IncSearch term=inverse,undercurl cterm=bold,undercurl ctermfg=16 ctermbg=130
+        \ gui=undercurl guibg=#af5f50 guifg=#000000
 highlight Search    term=inverse,bold cterm=bold ctermfg=16 ctermbg=134
         \ guibg=#af0000
         "\ guibg=#af31b6
