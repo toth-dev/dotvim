@@ -95,5 +95,14 @@
     shallow = true
     update = rebase
 [submodule "bundle/vim-python-pep8-indent"]
-	path = bundle/vim-python-pep8-indent
-	url = https://github.com/Vimjas/vim-python-pep8-indent.git
+    path = bundle/vim-python-pep8-indent
+    url = https://github.com/Vimjas/vim-python-pep8-indent.git
+    branch = master
+    shallow = true
+    update = rebase
+[submodule "bundle/colorizer"]
+    path = bundle/colorizer
+    url = https://github.com/lilydjwg/colorizer
+    branch = master
+    shallow = true
+    update = rebase
