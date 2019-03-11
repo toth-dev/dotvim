@@ -64,6 +64,8 @@ set autoread
 
 " display tabs and trailing blanks
 set list listchars=tab:».,trail:¶,extends:>,precedes:<
+let g:LcsTab='tab:».,trail:¶,extends:>,precedes:<'
+let g:LcsNoTab='tab:  ,trail:¶,extends:>,precedes:<'
 "set list listchars=tab:»\ ,trail:·
 "set list listchars=tab:>\ ,trail:$
 
@@ -511,6 +513,10 @@ command! ColorDemo new +call\ ColorDemo()\ |\ set\ bt=nofile
 command! Rc source $MYVIMRC
 command! ERc edit $MYVIMRC
 
+command! ShowTab let &listchars=g:LcsTab
+command! HideTab let &listchars=g:LcsNoTab
+"	test
+
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -524,7 +530,7 @@ command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=h
 " :w!! command saves current file with sudo, useful when changes were made in
 " read-only mode
 " http://www.jovicailic.org/2015/05/saving-read-only-files-in-vim-sudo-trick/
-cnoremap w!! w !sudo tee % >/dev/null
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 if $USER !=# 'root' && exists('+secure')
     " enable .vimrc in current directory
