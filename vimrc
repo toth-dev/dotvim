@@ -108,6 +108,7 @@ autocmd FileType latex,tex,md,markdown setlocal spell
 "autocmd FileType latex,tex,md,markdown setlocal formatoptions=tcroqb1anj
 autocmd FileType latex,tex,md,markdown setlocal formatoptions=roj
 autocmd FileType latex,tex,md,markdown setlocal textwidth=72
+autocmd FileType yaml setlocal sw=2 ts=2
 
 autocmd FileType gitcommit setlocal textwidth=72 spell
 
@@ -507,6 +508,20 @@ function! ColorDemo()
         let num = num - 1
     endwhile
 endfunction
+
+function! TryDiffFile()
+    let path = expand('%')
+    if (stridx(path, 'a/') == 0 && !isdirectory('a')) || (stridx(path, 'b/') == 0 && !isdirectory('b'))
+        let newpath = path[2:]
+        if filereadable(newpath)
+            bdelete!
+            exec 'edit ' . newpath
+        endif
+    endif
+endfunction
+
+autocmd BufNewFile a/*,b/* call TryDiffFile()
+
 
 command! TrimWS call TrimWS()
 command! ColorDemo new +call\ ColorDemo()\ |\ set\ bt=nofile
