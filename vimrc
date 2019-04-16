@@ -106,7 +106,7 @@ let g:html_use_css = 1
 
 autocmd FileType latex,tex,md,markdown setlocal spell
 "autocmd FileType latex,tex,md,markdown setlocal formatoptions=tcroqb1anj
-autocmd FileType latex,tex,md,markdown setlocal formatoptions=roj
+autocmd FileType latex,tex,md,markdown setlocal formatoptions=rojtcq
 autocmd FileType latex,tex,md,markdown setlocal textwidth=72
 autocmd FileType yaml setlocal sw=2 ts=2
 
@@ -516,6 +516,7 @@ function! TryDiffFile()
         if filereadable(newpath)
             bdelete!
             exec 'edit ' . newpath
+            filetype detect
         endif
     endif
 endfunction
@@ -534,9 +535,8 @@ command! HideTab let &listchars=g:LcsNoTab
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-command! DiffOrig let _ft=&ft | vert new | set bt=nofile | let &ft=_ft | r # |
-    \ 0d_ | diffthis | wincmd p | diffthis
+command! DiffOrig diffoff | let _ft=&ft | vert new | set bt=nofile |
+    \ let &ft=_ft | r # | 0d_ | diffthis | wincmd p | diffthis
 
 " user command (named R) to allow easy capture of output in a scratch buffer
 " http://vim.wikia.com/wiki/Append_output_of_an_external_command
@@ -573,13 +573,6 @@ set wildmenu
 set wildmode=list:longest,list:full
 
 set helpheight=15
-
-" a status line will be used to separate windows.  The 'laststatus' option
-" tells when the last window also has a status line:
-"   'laststatus' = 0   never a status line
-"   'laststatus' = 1   status line if there is more than one window
-"   'laststatus' = 2   always a status line
-set laststatus=2
 
 " threshold for reporting number of lines changed (for commands like
 " substitution), 0 means always report
@@ -658,10 +651,10 @@ vnoremap <script> // "ty<SID>//
 nnoremap <expr> <SID>// '/\V'.escape(@t,'\/').'<CR>'
 
 
-" needed becouse sourcing vimrc again makes the sign column
+" needed because sourcing vimrc again makes the sign column glitchy
 if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
     call gitgutter#highlight#define_sign_column_highlight()
     call gitgutter#highlight#define_highlights()
 endif
 
-" vim:  foldmethod=marker foldmarker={{,}}
+" vim: foldmethod=marker foldmarker={{,}}
