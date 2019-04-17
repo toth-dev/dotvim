@@ -535,8 +535,22 @@ command! HideTab let &listchars=g:LcsNoTab
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
-command! DiffOrig diffoff | let _ft=&ft | vert new | set bt=nofile |
-    \ let &ft=_ft | r # | 0d_ | diffthis | wincmd p | diffthis
+function! DiffOrig()
+    diffoff
+    let _ft=&ft
+    vert new
+    set buftype=nofile
+    let &ft=_ft
+    read #
+    0delete _
+    diffthis
+    autocmd BufHidden <buffer> diffoff!
+
+    wincmd p
+    diffthis
+endfunction
+
+command! DiffOrig call DiffOrig()
 
 " user command (named R) to allow easy capture of output in a scratch buffer
 " http://vim.wikia.com/wiki/Append_output_of_an_external_command
