@@ -106,7 +106,8 @@ let g:html_use_css = 1
 
 autocmd FileType latex,tex,md,markdown setlocal spell
 "autocmd FileType latex,tex,md,markdown setlocal formatoptions=tcroqb1anj
-autocmd FileType latex,tex,md,markdown setlocal formatoptions=rojtcq
+autocmd FileType latex,tex,md,markdown setlocal formatoptions=ojtcq
+autocmd FileType latex,tex,md,markdown setlocal comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-,fb:*
 autocmd FileType latex,tex,md,markdown setlocal textwidth=72
 autocmd FileType yaml setlocal sw=2 ts=2
 
@@ -536,7 +537,7 @@ command! HideTab let &listchars=g:LcsNoTab
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 function! DiffOrig()
-    diffoff
+    bufdo diffoff
     let _ft=&ft
     vert new
     set buftype=nofile
