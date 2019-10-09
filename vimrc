@@ -544,11 +544,13 @@ function! DiffOrig()
     let &ft=_ft
     read #
     0delete _
+
     diffthis
-    autocmd BufHidden <buffer> diffoff!
+    autocmd BufHidden <buffer> bufdo diffoff!
 
     wincmd p
     diffthis
+    autocmd BufHidden <buffer> bufdo diffoff!
 endfunction
 
 command! DiffOrig call DiffOrig()
