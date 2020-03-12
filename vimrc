@@ -34,7 +34,7 @@ if has('+shellslash')
 endif
 
 
-" line numbers are absolute by default, unless you’re moving around in normal
+" line numbers are relative by default, unless you’re moving around in insert
 " mode
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
 if exists('+relativenumber')
@@ -537,20 +537,30 @@ command! HideTab let &listchars=g:LcsNoTab
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 function! DiffOrig()
-    bufdo diffoff
+    " disable possible current diffing
+    let currwin=winnr()
+    windo diffoff
+    execute currwin . 'wincmd w'
+
     let _ft=&ft
+    let _file = expand('%:p:~:.')
+    let _file_new =  _file . ' - ' . strftime("%x %X") . ' ON DISK '
+
     vert new
     set buftype=nofile
     let &ft=_ft
-    read #
-    0delete _
+
+    execute 'silent read ' . _file
+    silent 0delete _
+    setlocal readonly nomodifiable
+    execute 'silent file' _file_new
 
     diffthis
-    autocmd BufHidden <buffer> bufdo diffoff!
+    autocmd BufWinLeave <buffer> diffoff!
 
     wincmd p
     diffthis
-    autocmd BufHidden <buffer> bufdo diffoff!
+    autocmd BufWinLeave <buffer> diffoff!
 endfunction
 
 command! DiffOrig call DiffOrig()
