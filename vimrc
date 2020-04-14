@@ -482,7 +482,7 @@ endif
 function! TrimWS()
     mark '
     " e flag: do not show error when there is nothing to replace
-    %substitute/\s\s*$//e
+    %substitute/\v(\s|\r)+$//e
     normal g`'
 endfunction
 
@@ -683,5 +683,6 @@ if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
     call gitgutter#highlight#define_sign_column_highlight()
     call gitgutter#highlight#define_highlights()
 endif
+
 
 " vim: foldmethod=marker foldmarker={{,}}
