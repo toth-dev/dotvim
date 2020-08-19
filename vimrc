@@ -364,7 +364,9 @@ endif
 if hostname() == 'ural2'
     colorscheme solarized8_dark
 else
-    colorscheme wwdc16
+    "colorscheme wwdc16
+    colorscheme wombat256grf
+    highlight StatusLine gui=none
 endif
 
 highlight IncSearch term=inverse,undercurl cterm=bold,undercurl ctermfg=16 ctermbg=130
