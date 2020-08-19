@@ -46,6 +46,10 @@ endif
 " enable use of the mouse for all modes
 set mouse=a
 
+" fix clicking past the 220th column,
+" https://stackoverflow.com/a/19253251/9227004
+set ttymouse=sgr
+
 " each item allows a way to backspace over something:
 "     indent  allow backspacing over autoindent
 "     eol     allow backspacing over line breaks (join lines)
@@ -339,6 +343,16 @@ elseif &term =~ 'xterm'
     let &t_SI = &t_SI . "\e[5 q"
     let &t_EI = &t_EI . "\e[1 q"
 endif
+
+" https://superuser.com/a/402084
+if &term =~ '^screen' || &term =~ '^tmux'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
 
 " make striketrough work in TMUX
 if exists('$TMUX') && exists('&t_Te')
