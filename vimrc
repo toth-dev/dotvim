@@ -129,8 +129,8 @@ set showmode
 " remove splash screen
 set shortmess+=I
 
-" instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
+" instead of failing a command because of unsaved changes, raise a dialogue
+" asking if you wish to save changed files.
 set confirm
 
 " when there is a previous search pattern, highlight all its matches.
@@ -198,7 +198,7 @@ set hidden
 "               Otherwise: do not split, use current window.
 set switchbuf=useopen,usetab,split
 
-" put backup, swap and undo files in a central directory instead of the current
+" put swap, backup and undo files in a central directory instead of the current
 " dir
 if has('win32') || has ('win64')
     let $VIMHOME = $HOME . '/vimfiles'
@@ -206,13 +206,16 @@ else
     let $VIMHOME = $HOME . '/.vim'
 endif
 
-let &directory=$VIMHOME . '/swap//, ., ~//, ~/tmp'
-let &backupdir=$VIMHOME . '/swap/, ., ~/tmp, ~/'
+let &directory=$VIMHOME . '/swap//, ., ~//, ~/tmp//'
+let &backupdir=$VIMHOME . '/swap//, ., ~/tmp//, ~//'
 
 " remove backup after the file was successful written
 set nobackup writebackup
 
-set swapfile updatecount=40 updatetime=1500
+set swapfile
+" wait for this many characters to be typed or idle milliseconds before writing
+" swap files
+set updatecount=50 updatetime=1500
 
 if has('persistent_undo')
     set undofile
@@ -234,8 +237,8 @@ if has('title') && has('statusline') && &t_ts != ''
         set titlestring+=@%{hostname()}          " hostname if inside SSH,
                                                  " but not in TMUX
     endif
-    set titlestring+=%(\ %a%) " path, hostname, argument list status (X of Y)
-    set titlestring+=%< " truncate at the end
+    set titlestring+=%(\ %a%)  " argument list status (X of Y)
+    set titlestring+=%<        " truncate at the end
 endif
 
 if has('gui_running')
@@ -271,9 +274,8 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline']
 
-if hostname() == 'ural2'
+if hostname() ==? 'ural2'
     let g:pathogen_disabled = [ 'gruvbox', 'sslsecure.vim', 'vim-airline', 'vim-color-spring-night', 'vim-easy-align', 'vim-fugitive', 'vim-gitgutter', 'vim-latex-suite', 'vimtex', 'vim-wwdc16-theme']
-
     " 'mkdx', 'nova.vim', 'vim-searchindex', 'vim-solarized8'
 endif
 
@@ -317,7 +319,7 @@ if has('termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-if &term =~ '256color'
+if &term =~? '256color'
     " Disable Background Color Erase (BCE) so that color schemes work properly
     " when Vim is used inside tmux and GNU screen. From:
     " https://superuser.com/a/588243
@@ -339,13 +341,13 @@ if exists('$TMUX')
     let &t_SI = &t_SI . "\<ESC>Ptmux;\e\e[5 q\e\\"
     let &t_EI = &t_EI . "\<ESC>Ptmux;\e\e[1 q\e\\"
     set ttimeoutlen=20
-elseif &term =~ 'xterm'
+elseif &term =~? 'xterm'
     let &t_SI = &t_SI . "\e[5 q"
     let &t_EI = &t_EI . "\e[1 q"
 endif
 
 " https://superuser.com/a/402084
-if &term =~ '^screen' || &term =~ '^tmux'
+if &term =~? '^screen' || &term =~? '^tmux'
     " tmux will send xterm-style keys when its xterm-keys option is on
     execute "set <xUp>=\e[1;*A"
     execute "set <xDown>=\e[1;*B"
@@ -375,7 +377,7 @@ endif
 
 "colorscheme nova
 "colorscheme spring-night
-if hostname() == 'ural2'
+if hostname() ==? 'ural2'
     colorscheme solarized8_dark
 else
     "colorscheme wwdc16
@@ -383,11 +385,12 @@ else
     highlight StatusLine gui=none
 endif
 
+" custom search colors: orange for the first, cyan for the rest of matches
 highlight IncSearch term=inverse,undercurl cterm=bold,undercurl ctermfg=16 ctermbg=130
-        \ gui=undercurl guibg=#af5f50 guifg=#000000
+            \ gui=undercurl guibg=#af5f50 guifg=#000000
 highlight Search    term=inverse,bold cterm=bold ctermfg=16 ctermbg=134
-        \ guibg=#af0000
-        "\ guibg=#af31b6
+            \ guibg=#af0000
+            "\ guibg=#af31b6
 
 highlight Search guibg=Turquoise4 guifg=#ffffff
 
@@ -396,14 +399,14 @@ highlight Search guibg=Turquoise4 guifg=#ffffff
 highlight StatusLineNC gui=inverse guibg=#000000
 "highlight StatusLineNC term=inverse cterm=inverse gui=bold guibg=#00ff00
 highlight User1 term=inverse,bold ctermfg=15 ctermbg=240
-        \ gui=bold guibg=#333333            " buffer number
+            \ gui=bold guibg=#333333            " buffer number
 highlight User2 term=inverse,bold cterm=bold ctermfg=16 ctermbg=160
-        \ gui=bold guibg=#ee1111            " modified, read-only and root flags
+            \ gui=bold guibg=#ee1111            " modified, read-only and root flags
 highlight User3 term=inverse,bold ctermfg=15 ctermbg=238
-        \ guibg=#555555                     " character under cursor
+            \ guibg=#555555                     " character under cursor
 
 highlight SpecialKey cterm=bold gui=bold guifg=#D57AF4
-    " original: #455A64
+" original: #455A64
 " use it for line overflow marks and 'showbreak' too:
 set highlight+=@:SpecialKey
 
@@ -458,12 +461,12 @@ if has('statusline') && (!exists('g:loaded_airline') || !g:loaded_airline)
     set statusline+=%2*%m                       " modified flag (red)
     set statusline+=%#LineNr#[%Y%H%W]%k%a       " file type + flags
     function! GetStatusLineEnc()
-        let l:enc = &fenc!='' ? &fenc : &enc
+        let l:enc = &fileencoding!='' ? &fileencoding : &encoding
         if l:enc == 'utf-8'
             let l:enc = ''
         endif
 
-        let l:ff = &ff != 'unix' ? &ff : ''
+        let l:ff = &fileformat != 'unix' ? &fileformat : ''
 
         if l:enc == '' && l:ff == ''
             return ''
@@ -499,7 +502,7 @@ function! TrimWS()
     mark '
     " e flag: do not show error when there is nothing to replace
     %substitute/\v(\s|\r)+$//e
-    normal g`'
+    normal! g`'
 endfunction
 
 " display the 256 available xterm background and foreground colors
@@ -558,18 +561,18 @@ function! DiffOrig()
     windo diffoff
     execute currwin . 'wincmd w'
 
-    let _ft=&ft
-    let _file = expand('%:p:~:.')
-    let _file_new =  _file . ' - ' . strftime("%x %X") . ' ON DISK '
+    let l:ft=&filetype
+    let l:file = expand('%:p:~:.')
+    let l:file_new = l:file . ' - ' . strftime('%x %X') . ' ON DISK '
 
     vert new
     set buftype=nofile
-    let &ft=_ft
+    let &filetype = l:ft
 
-    execute 'silent read ' . _file
+    execute 'silent read ' . l:file
     silent 0delete _
+    execute 'silent file' l:file_new
     setlocal readonly nomodifiable
-    execute 'silent file' _file_new
 
     diffthis
     autocmd BufWinLeave <buffer> diffoff!
