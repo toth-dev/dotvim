@@ -100,6 +100,8 @@ endif
 let g:tex_flavor='latex'
 
 let g:gitgutter_override_sign_column_highlight = 1
+let g:gitgutter_highlight_linenrs = 1
+
 "let g:gitgutter_diff_args = '-w'
 "let g:gitgutter_highlight_lines = 0
 
@@ -699,7 +701,7 @@ nnoremap <expr> <SID>// '/\V'.escape(@t,'\/').'<CR>'
 
 " needed because sourcing vimrc again makes the sign column glitchy
 if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
-    call gitgutter#highlight#define_sign_column_highlight()
+    call gitgutter#highlight#define_sign_text_highlights()
     call gitgutter#highlight#define_highlights()
 endif
 
