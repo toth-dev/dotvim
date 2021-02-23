@@ -107,8 +107,33 @@
     shallow = true
     update = rebase
 [submodule "bundle/plantuml-syntax"]
-	path = bundle/plantuml-syntax
-	url = https://github.com/aklt/plantuml-syntax.git
+    path = bundle/plantuml-syntax
+    url = https://github.com/aklt/plantuml-syntax.git
+    branch = master
+    shallow = true
+    update = rebase
 [submodule "bundle/wombat256grf"]
-	path = bundle/wombat256grf
-	url = https://github.com/gryf/wombat256grf.git
+    path = bundle/wombat256grf
+    url = https://github.com/gryf/wombat256grf.git
+    branch = master
+    shallow = true
+    update = rebase
+[submodule "bundle/fzf"]
+    path = bundle/fzf
+    url = https://github.com/junegunn/fzf.git
+    branch = master
+    shallow = true
+    update = rebase
+[submodule "bundle/fzf.vim"]
+    path = bundle/fzf.vim
+    url = https://github.com/junegunn/fzf.vim.git
+    branch = master
+    shallow = true
+    update = rebase
+[submodule "bundle/unicodemoji"]
+    path = bundle/unicodemoji
+    url = https://github.com/yazgoo/unicodemoji.git
+    branch = master
+    shallow = true
+    update = rebase
+    # Unicodemoji[Code] => 🚀 :rocket:

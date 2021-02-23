@@ -105,6 +105,10 @@ let g:gitgutter_highlight_linenrs = 1
 "let g:gitgutter_diff_args = '-w'
 "let g:gitgutter_highlight_lines = 0
 
+let g:fzf_colors = {
+            \ 'hl':      ['fg', 'Keyword'],
+            \ 'hl+':      ['bg', 'Error'] }
+
 let g:html_number_lines = 1
 let g:html_line_ids = 1
 let g:html_prevent_copy = 'fn'
