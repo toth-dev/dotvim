@@ -109,6 +109,9 @@ let g:fzf_colors = {
             \ 'hl':      ['fg', 'Keyword'],
             \ 'hl+':      ['bg', 'Error'] }
 
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = "2"
+
 let g:html_number_lines = 1
 let g:html_line_ids = 1
 let g:html_prevent_copy = 'fn'

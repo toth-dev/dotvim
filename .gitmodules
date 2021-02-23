@@ -137,3 +137,9 @@
     shallow = true
     update = rebase
     # Unicodemoji[Code] => 🚀 :rocket:
+[submodule "bundle/jedi-vim"]
+	path = bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
+    branch = master
+    shallow = true
+    update = rebase
