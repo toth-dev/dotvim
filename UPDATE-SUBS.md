@@ -28,7 +28,7 @@ address has changed) with these commands:
 
 ```bash
 git submodule sync
-git submodule update --remote --init --recursive
+git submodule update --remote --init
 ```
 
 To fix broken submodule branches (HEAD detached), use:
