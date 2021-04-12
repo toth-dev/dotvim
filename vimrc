@@ -242,6 +242,9 @@ if has('title') && has('statusline') && &t_ts != ''
     set title
     set titlestring=%t%(\ %{&ro?'=':''}%M%)      " filename, readonly, modified
     set titlestring+=\ (%{expand(\"%:p:~:h\")})  " path
+    if exists('$SUDO_USER') && !exists('$TMUX')
+        set titlestring+=\ ~\ %{$USER}           " username if inside sudo cmd,
+    endif
     if exists('$SSH_CONNECTION') && !exists('$TMUX')
         set titlestring+=@%{hostname()}          " hostname if inside SSH,
                                                  " but not in TMUX
