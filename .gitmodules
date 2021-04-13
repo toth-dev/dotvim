@@ -143,3 +143,9 @@
     branch = master
     shallow = true
     update = rebase
+[submodule "bundle/papercolor-theme"]
+	path = bundle/papercolor-theme
+	url = https://github.com/NLKNguyen/papercolor-theme.git
+    branch = master
+    shallow = true
+    update = rebase

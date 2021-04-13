@@ -393,8 +393,17 @@ if hostname() ==? 'ural2'
     colorscheme solarized8_dark
 else
     "colorscheme wwdc16
-    colorscheme wombat256grf
-    highlight StatusLine gui=none
+    let g:PaperColor_Theme_Options = {
+    \   'theme': {
+    \     'default.dark': {
+    \       'override' : {
+    \         'linenumber_bg' : ['#0e0e0e', '232']
+    \       }
+    \     }
+    \   }
+    \ }
+    colorscheme PaperColor
+    highlight StatusLine gui=inverse
 endif
 
 " custom search colors: orange for the first, cyan for the rest of matches
@@ -408,14 +417,20 @@ highlight Search guibg=Turquoise4 guifg=#ffffff
 
 
 " status-line colors
-highlight StatusLineNC gui=inverse guibg=#000000
+highlight StatusLineNC gui=inverse
 "highlight StatusLineNC term=inverse cterm=inverse gui=bold guibg=#00ff00
 highlight User1 term=inverse,bold ctermfg=15 ctermbg=240
             \ gui=bold guibg=#333333            " buffer number
+highlight User1 guibg=#cccccc guifg=#631200 gui=bold cterm=bold
+highlight User1 guibg=#242424 guifg=#e5786d gui=none cterm=none
+
 highlight User2 term=inverse,bold cterm=bold ctermfg=16 ctermbg=160
             \ gui=bold guibg=#ee1111            " modified, read-only and root flags
+highlight User2 term=inverse,bold cterm=bold ctermfg=16 ctermbg=160
+            \ gui=bold guibg=#e5684d guifg=#242424           " modified, read-only and root flags
+
 highlight User3 term=inverse,bold ctermfg=15 ctermbg=238
-            \ guibg=#555555                     " character under cursor
+            \ guibg=#242424                     " character under cursor
 
 highlight SpecialKey cterm=bold gui=bold guifg=#D57AF4
 " original: #455A64
@@ -431,7 +446,7 @@ highlight DiffText   cterm=none ctermfg=10 ctermbg=88
 "highlight ColorColumn term=reverse cterm=bold ctermbg=1 ctermfg=7
 
 highlight clear MatchParen
-highlight MatchParen term=reverse cterm=reverse,underline
+highlight MatchParen term=reverse cterm=underline,bold guibg=#888888 guifg=#000000
 "underline
 
 " change line number column style
@@ -441,10 +456,10 @@ highlight MatchParen term=reverse cterm=reverse,underline
 "highlight LineNr term=underline ctermfg=10 ctermbg=0
 "    \ guifg=#586e75 guibg=#000000
 
-highlight CursorLineNr term=reverse cterm=NONE gui=NONE guibg=#052731
+highlight CursorLineNr  term=bold ctermfg=11 guifg=#ffff00 guibg=#303030
 "guibg=#073642
 
-"highlight! link SignColumn LineNr
+highlight! link SignColumn LineNr
 
 "highlight Error ctermbg=160 ctermfg=15
 highlight Error ctermbg=Red ctermfg=White
@@ -454,9 +469,9 @@ highlight clear SpellBad
 highlight SpellBad cterm=underline gui=underline,bold
 
 if v:version > 700
-    "set cursorline
+    set cursorline
     highlight clear CursorLine
-    highlight CursorLine cterm=underline
+    "highlight CursorLine cterm=underline
     " ctermbg=0
 endif
 
