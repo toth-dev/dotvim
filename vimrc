@@ -578,19 +578,32 @@ command! ERc edit $MYVIMRC
 
 command! ShowTab let &listchars=g:LcsTab
 command! HideTab let &listchars=g:LcsNoTab
-"	test
+"		test
+
+command! Yall   %y +
+command! ConflictSearch /\v(\<|\>|\=){7}
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 function! DiffOrig()
+    let l:ft=&filetype
+    let l:file = expand('%:p:.')
+    let l:file_new =  l:file . ' - ' . strftime('%x %X') . ' ON DISK '
+
+    if  l:file == ''
+        echo 'No filename'
+        return 1
+    endif
+    if !filereadable(l:file)
+        echo 'File does not exist or is not readable'
+        return 1
+    endif
+
     " disable possible current diffing
     let currwin=winnr()
     windo diffoff
     execute currwin . 'wincmd w'
 
-    let l:ft=&filetype
-    let l:file = expand('%:p:~:.')
-    let l:file_new = l:file . ' - ' . strftime('%x %X') . ' ON DISK '
 
     vert new
     set buftype=nofile
