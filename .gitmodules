@@ -149,3 +149,6 @@
     branch = master
     shallow = true
     update = rebase
+[submodule "bundle/rainbow"]
+	path = bundle/rainbow
+	url = https://github.com/luochen1990/rainbow
