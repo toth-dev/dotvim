@@ -257,10 +257,31 @@ if has('gui_running')
     if has('win32')
         set guifont=Hack:h10:cEASTEUROPE
         set visualbell
+        let g:gfont_size = 10
     elseif has('unix')
-        set guifont=Hack\ 10
+        set guifont=Hack\ 12
+        let g:gfont_size = 12
     endif
+
+    if !exists('g:font_size')
+    endif
+    function! FontSizePlus ()
+        let g:gfont_size = g:gfont_size + 1
+        let l:new_font_size = ' '.g:gfont_size
+        let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+    endfunction
+
+    function! FontSizeMinus ()
+        let g:gfont_size = g:gfont_size - 1
+        let l:new_font_size = ' '.g:gfont_size
+        let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+    endfunction
+
+    nnoremap <silent> <c-8> :call FontSizeMinus()<CR>
+    nnoremap <silent> <c-9> :call FontSizePlus()<CR>
 endif
+
+
 
 let mapleader = ','
 let g:mkdx#map_prefix = '<leader>'
