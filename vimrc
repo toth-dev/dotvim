@@ -582,14 +582,31 @@ function! TryDiffFile()
     if (stridx(path, 'a/') == 0 && !isdirectory('a')) || (stridx(path, 'b/') == 0 && !isdirectory('b'))
         let newpath = path[2:]
         if filereadable(newpath)
-            bdelete!
-            exec 'edit ' . newpath
+            exec 'file ' . newpath
+            edit!
             filetype detect
         endif
     endif
 endfunction
 
+function! TryLineGoto()
+    let path = expand('%')
+    let match = matchstrpos(path, ':\d\+$')
+    if (match[0] != '')
+        let colonpos = match[1]
+        let newpath = path[:colonpos-1]
+        let linenr = path[colonpos+1:]
+        if (!filereadable(path) && filereadable(newpath))
+            exec 'file ' . newpath
+            edit!
+            filetype detect
+            exec linenr
+        endif
+    endif
+endfunction
+
 autocmd BufNewFile a/*,b/* call TryDiffFile()
+autocmd BufNewFile *:[0-9]\\\{1,\} call TryLineGoto()
 
 
 command! TrimWS call TrimWS()
