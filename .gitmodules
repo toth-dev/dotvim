@@ -152,3 +152,6 @@
 [submodule "bundle/rainbow"]
 	path = bundle/rainbow
 	url = https://github.com/luochen1990/rainbow
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = https://github.com/preservim/nerdcommenter.git
