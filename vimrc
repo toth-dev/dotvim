@@ -125,6 +125,7 @@ autocmd FileType latex,tex,md,markdown setlocal textwidth=72
 autocmd FileType yaml setlocal sw=2 ts=2
 
 autocmd FileType gitcommit setlocal textwidth=72 spell
+autocmd FileType python setlocal textwidth=119 spell
 
 autocmd FileType sh setlocal formatoptions-=t  " do not hard break long lines
 
@@ -305,7 +306,7 @@ endif
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " To disable a plugin, add it's bundle name to the following list
-let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline']
+let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline', 'vimtex, jedi-vim']
 
 if hostname() ==? 'ural2'
     let g:pathogen_disabled = [ 'gruvbox', 'sslsecure.vim', 'vim-airline', 'vim-color-spring-night', 'vim-easy-align', 'vim-fugitive', 'vim-gitgutter', 'vim-latex-suite', 'vimtex', 'vim-wwdc16-theme']
@@ -329,6 +330,64 @@ if 1
 
     execute pathogen#infect()
 endif
+
+if executable('ty')
+    if !exists('g:ty_server_args')
+        let g:ty_server_args = []
+    endif
+
+    if !exists('g:ty_workspace_settings')
+        let g:ty_workspace_settings = {}
+    endif
+
+    let g:lsp_log_verbose = 0
+
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'ty',
+                \ 'cmd': {server_info -> extend(['ty', 'server'], g:ty_server_args)},
+                \ 'allowlist': ['python'],
+                \ 'workspace_config': {
+                \   'ty': g:ty_workspace_settings
+                \ },
+                \ })
+endif
+if executable('ruff')
+    au User lsp_setup call lsp#register_server({
+            \ 'name': 'ruff',
+            \ 'cmd': {server_info->['ruff', 'server']},
+            \ 'allowlist': ['python'],
+            \ 'workspace_config': {},
+            \ })
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 set timeout timeoutlen=1500 ttimeoutlen=100
 
