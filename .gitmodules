@@ -1,5 +1,5 @@
 [submodule "bundle/mkdx"]
-    path = bundle/mkdx
+	path = pack/plugin/opt/mkdx
     url = https://github.com/SidOfc/mkdx.git
     branch = master
     shallow = true

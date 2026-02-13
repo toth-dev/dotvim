@@ -128,6 +128,9 @@ autocmd FileType gitcommit setlocal textwidth=72 spell
 autocmd FileType python setlocal textwidth=119 spell
 
 autocmd FileType sh setlocal formatoptions-=t  " do not hard break long lines
+autocmd FileType dot setlocal makeprg=dot\ -Tpdf\ -O\ %
+autocmd FileType python setlocal textwidth=120
+
 
 " show partial commands in the last line of the screen
 set showcmd
@@ -306,7 +309,7 @@ endif
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " To disable a plugin, add it's bundle name to the following list
-let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline', 'vimtex, jedi-vim']
+let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline', 'vim-searchindex', 'vimtex, jedi-vim']
 
 if hostname() ==? 'ural2'
     let g:pathogen_disabled = [ 'gruvbox', 'sslsecure.vim', 'vim-airline', 'vim-color-spring-night', 'vim-easy-align', 'vim-fugitive', 'vim-gitgutter', 'vim-latex-suite', 'vimtex', 'vim-wwdc16-theme']
@@ -360,6 +363,14 @@ if executable('ruff')
             \ })
 endif
 
+if executable('rust-analyzer')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'Rust Language Server',
+        \   'cmd': {server_info->['rust-analyzer']},
+        \   'whitelist': ['rust'],
+        \ })
+endif
+
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
@@ -379,6 +390,10 @@ function! s:on_lsp_buffer_enabled() abort
 
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
     " refer to doc to add more commands
 endfunction
