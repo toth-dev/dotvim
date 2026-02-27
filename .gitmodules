@@ -118,13 +118,6 @@
     branch = master
     shallow = true
     update = rebase
-[submodule "bundle/unicodemoji"]
-	path = pack/plugin/opt/unicodemoji
-    url = https://github.com/yazgoo/unicodemoji.git
-    branch = master
-    shallow = true
-    update = rebase
-    # Unicodemoji[Code] => 🚀 :rocket:
 [submodule "bundle/jedi-vim"]
 	path = pack/plugin/opt/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git

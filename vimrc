@@ -85,7 +85,6 @@ set autoindent
 set formatoptions+=n      " support for numbered/bullet lists
 set formatoptions+=l      " only break lines that were not longer than 'tw'
 
-filetype plugin indent on
 autocmd BufRead,BufNewFile .bash_login set filetype=sh
 syntax clear
 syntax on
@@ -330,6 +329,11 @@ if 1
     "let g:airline_powerline_fonts = 1
     "set timeoutlen=10
 
+    packadd! nerdcommenter
+    packadd! colorizer
+    packadd! rainbow
+
+    let g:rainbow_active = 1
 endif
 
 if executable('ty')
@@ -409,6 +413,9 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" needs to be after all :packadd uses
+filetype plugin indent on
 
 " ~~~~~~~~~~~~~
 " ~~ THEMING ~~
