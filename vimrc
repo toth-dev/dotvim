@@ -141,6 +141,10 @@ set showmode
 " remove splash screen
 set shortmess+=I
 
+" show search counts
+set shortmess-=S
+set maxsearchcount=300
+
 " instead of failing a command because of unsaved changes, raise a dialogue
 " asking if you wish to save changed files.
 set confirm
