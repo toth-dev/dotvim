@@ -302,11 +302,10 @@ if has('unix') && system('uname -m') !~? 'x86*'
 endif
 
 
-" ~~~~~~~~~~~~~~
-" ~~ PATHOGEN ~~
-" ~~~~~~~~~~~~~~
+" ~~~~~~~~~~~~~
+" ~~ PLUGINS ~~
+" ~~~~~~~~~~~~~
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = ['vim-latex-suite', 'vim-airline', 'vim-searchindex', 'vimtex, jedi-vim']
@@ -331,7 +330,6 @@ if 1
     "let g:airline_powerline_fonts = 1
     "set timeoutlen=10
 
-    execute pathogen#infect()
 endif
 
 if executable('ty')

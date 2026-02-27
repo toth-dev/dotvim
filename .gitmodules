@@ -5,7 +5,7 @@
     shallow = true
     update = rebase
 [submodule "bundle/gruvbox"]
-    path = bundle/gruvbox
+	path = pack/plugin/opt/gruvbox
     url = https://github.com/morhetz/gruvbox.git
     branch = master
     shallow = true
@@ -17,150 +17,138 @@
     shallow = true
     update = rebase
 [submodule "bundle/vim-gitgutter"]
-    path = bundle/vim-gitgutter
+	path = pack/plugin/start/vim-gitgutter
     url = https://github.com/airblade/vim-gitgutter.git
     branch = master
     shallow = true
     update = rebase
-[submodule "bundle/vim-latex-suite"]
-    path = bundle/vim-latex-suite
-    url = https://github.com/gerw/vim-latex-suite
-    branch = master
-    shallow = true
-    update = rebase
-[submodule "bundle/vim-pathogen"]
-    path = bundle/vim-pathogen
-    url = https://github.com/tpope/vim-pathogen.git
-    branch = master
-    shallow = true
-    update = rebase
 [submodule "bundle/nova.vim"]
-    path = bundle/nova.vim
+	path = pack/theme/opt/nova.vim
     url =  https://github.com/zanglg/nova.vim.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vimtex"]
-    path = bundle/vimtex
+	path = pack/plugin/opt/vimtex
     url = https://github.com/lervag/vimtex
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-solarized8"]
-    path = bundle/vim-solarized8
+	path = pack/theme/opt/vim-solarized8
     url = https://github.com/lifepillar/vim-solarized8.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-wwdc16-theme"]
-    path = bundle/vim-wwdc16-theme
+	path = pack/theme/opt/vim-wwdc16-theme
     url = https://github.com/lifepillar/vim-wwdc16-theme.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-searchindex"]
-    path = bundle/vim-searchindex
+	path = pack/plugin/opt/vim-searchindex
     url = https://github.com/google/vim-searchindex.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/sslsecure.vim"]
-    path = bundle/sslsecure.vim
+	path = pack/plugin/opt/sslsecure.vim
     url = https://github.com/chr4/sslsecure.vim.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-easy-align"]
-    path = bundle/vim-easy-align
+	path = pack/plugin/opt/vim-easy-align
     url = https://github.com/junegunn/vim-easy-align.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-color-spring-night"]
-    path = bundle/vim-color-spring-night
+	path = pack/plugin/opt/vim-color-spring-night
     url = https://github.com/rhysd/vim-color-spring-night
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-airline"]
-    path = bundle/vim-airline
+	path = pack/plugin/opt/vim-airline
     url = https://github.com/vim-airline/vim-airline.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-fugitive"]
-    path = bundle/vim-fugitive
+	path = pack/plugin/start/vim-fugitive
     url = https://github.com/tpope/vim-fugitive.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/vim-python-pep8-indent"]
-    path = bundle/vim-python-pep8-indent
+	path = pack/plugin/opt/vim-python-pep8-indent
     url = https://github.com/Vimjas/vim-python-pep8-indent.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/colorizer"]
-    path = bundle/colorizer
+	path = pack/plugin/opt/colorizer
     url = https://github.com/lilydjwg/colorizer
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/plantuml-syntax"]
-    path = bundle/plantuml-syntax
+	path = pack/plugin/opt/plantuml-syntax
     url = https://github.com/aklt/plantuml-syntax.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/wombat256grf"]
-    path = bundle/wombat256grf
+	path = pack/theme/opt/wombat256grf
     url = https://github.com/gryf/wombat256grf.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/fzf"]
-    path = bundle/fzf
+	path = pack/plugin/start/fzf
     url = https://github.com/junegunn/fzf.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/fzf.vim"]
-    path = bundle/fzf.vim
+	path = pack/plugin/start/fzf.vim
     url = https://github.com/junegunn/fzf.vim.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/unicodemoji"]
-    path = bundle/unicodemoji
+	path = pack/plugin/opt/unicodemoji
     url = https://github.com/yazgoo/unicodemoji.git
     branch = master
     shallow = true
     update = rebase
     # Unicodemoji[Code] => 🚀 :rocket:
 [submodule "bundle/jedi-vim"]
-	path = bundle/jedi-vim
+	path = pack/plugin/opt/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/papercolor-theme"]
-	path = bundle/papercolor-theme
+	path = pack/theme/opt/papercolor-theme
 	url = https://github.com/NLKNguyen/papercolor-theme.git
     branch = master
     shallow = true
     update = rebase
 [submodule "bundle/rainbow"]
-	path = bundle/rainbow
+	path = pack/plugin/opt/rainbow
 	url = https://github.com/luochen1990/rainbow
 [submodule "bundle/nerdcommenter"]
-	path = bundle/nerdcommenter
+	path = pack/plugin/opt/nerdcommenter
 	url = https://github.com/preservim/nerdcommenter.git
 [submodule "bundle/vim-lsp"]
-	path = bundle/vim-lsp
+	path = pack/plugin/start/vim-lsp
 	url = https://github.com/prabirshrestha/vim-lsp
 [submodule "bundle/asyncomplete.vim"]
-	path = bundle/asyncomplete.vim
+	path = pack/plugin/start/asyncomplete.vim
 	url = https://github.com/prabirshrestha/asyncomplete.vim
 [submodule "bundle/asyncomplete-lsp.vim"]
-	path = bundle/asyncomplete-lsp.vim
+	path = pack/plugin/start/asyncomplete-lsp.vim
 	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
