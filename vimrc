@@ -48,7 +48,9 @@ set mouse=a
 
 " fix clicking past the 220th column,
 " https://stackoverflow.com/a/19253251/9227004
-set ttymouse=sgr
+if !has('nvim')
+    set ttymouse=sgr
+endif
 
 " each item allows a way to backspace over something:
 "     indent  allow backspacing over autoindent
@@ -143,7 +145,9 @@ set shortmess+=I
 
 " show search counts
 set shortmess-=S
-set maxsearchcount=300
+if !has('nvim')
+    set maxsearchcount=300
+endif
 
 " instead of failing a command because of unsaved changes, raise a dialogue
 " asking if you wish to save changed files.
@@ -337,9 +341,11 @@ if 1
     packadd! colorizer
     packadd! rainbow
 
-    packadd! asyncomplete-lsp.vim
-    packadd! asyncomplete.vim
-    packadd! vim-lsp
+    if !has('nvim')
+        packadd! asyncomplete-lsp.vim
+        packadd! asyncomplete.vim
+        packadd! vim-lsp
+    endif
 
     let g:rainbow_active = 1
 endif
@@ -543,7 +549,11 @@ highlight User3 term=inverse,bold ctermfg=15 ctermbg=238
 highlight SpecialKey cterm=bold gui=bold guifg=#D57AF4
 " original: #455A64
 " use it for line overflow marks and 'showbreak' too:
-set highlight+=@:SpecialKey
+if !has('nvim')
+    set highlight+=@:SpecialKey
+else
+    highlight link Whitespace SpecialKey
+endif
 
 " change diff highlighting
 highlight DiffAdd    cterm=none ctermfg=10 ctermbg=17
@@ -766,7 +776,9 @@ if $USER !=# 'root' && exists('+secure')
 endif
 
 " the default encryption (zip) is weak
-set cryptmethod=blowfish2
+if !has('nvim')
+    set cryptmethod=blowfish2
+endif
 
 " if Vim is used as the pager, this is needed for the case when you start Vim
 " normally and want to use Vim's Man function
@@ -846,8 +858,10 @@ noremap <F6> :cn<CR>
 noremap <F7> :cp<CR>
 
 " toggle options
-noremap <F2> :set paste! paste?<CR>
-set pastetoggle=<F2> " for insert mode
+if !has('nvim')
+    noremap <F2> :set paste! paste?<CR>
+    set pastetoggle=<F2> " for insert mode
+endif
 
 noremap <silent> <F3> :set spell! spell?<CR>
 inoremap <silent> <F3> <C-O>:set spell! spell?<CR>
