@@ -337,6 +337,10 @@ if 1
     packadd! colorizer
     packadd! rainbow
 
+    packadd! asyncomplete-lsp.vim
+    packadd! asyncomplete.vim
+    packadd! vim-lsp
+
     let g:rainbow_active = 1
 endif
 

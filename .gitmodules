@@ -137,11 +137,11 @@
 	path = pack/plugin/opt/nerdcommenter
 	url = https://github.com/preservim/nerdcommenter.git
 [submodule "bundle/vim-lsp"]
-	path = pack/plugin/start/vim-lsp
+	path = pack/plugin/opt/vim-lsp
 	url = https://github.com/prabirshrestha/vim-lsp
 [submodule "bundle/asyncomplete.vim"]
-	path = pack/plugin/start/asyncomplete.vim
+	path = pack/plugin/opt/asyncomplete.vim
 	url = https://github.com/prabirshrestha/asyncomplete.vim
 [submodule "bundle/asyncomplete-lsp.vim"]
-	path = pack/plugin/start/asyncomplete-lsp.vim
+	path = pack/plugin/opt/asyncomplete-lsp.vim
 	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
