@@ -145,7 +145,7 @@ set shortmess+=I
 
 " show search counts
 set shortmess-=S
-if !has('nvim')
+if exists('&maxsearchcount')
     set maxsearchcount=300
 endif
 
