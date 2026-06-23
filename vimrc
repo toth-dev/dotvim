@@ -878,6 +878,11 @@ inoremap <silent> <F4> <C-O>:nohlsearch<CR>
 vnoremap <script> // "ty<SID>//
 nnoremap <expr> <SID>// '/\V'.escape(@t,'\/').'<CR>'
 
+nnoremap <c-b> :Buffers<CR>
+nnoremap <c-f> :GFiles<CR>
+inoremap <c-b> <C-O>:Buffers<CR>
+inoremap <c-f> <C-O>:GFiles<CR>
+
 
 " needed because sourcing vimrc again makes the sign column glitchy
 if exists('gitgutter_enabled') && g:gitgutter_enabled == 1
