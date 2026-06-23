@@ -688,16 +688,19 @@ endfunction
 
 function! TryLineGoto()
     let path = expand('%')
-    let match = matchstrpos(path, ':\d\+$')
-    if (match[0] != '')
-        let colonpos = match[1]
-        let newpath = path[:colonpos-1]
-        let linenr = path[colonpos+1:]
+    let match = matchlist(path, '^\(.\{-1,}\)\(:\(\d\+\)\)\(:\(\d\+\)\)\?$')
+    if (len(match) != 0)
+        let newpath = match[1]
+        let linenr = match[3]
+        let colnr = match[5]
+        let colnr = colnr ? colnr : 0
+
+
         if (!filereadable(path) && filereadable(newpath))
             exec 'file ' . newpath
             edit!
             filetype detect
-            exec linenr
+            call cursor(linenr, colnr)
         endif
     endif
 endfunction
