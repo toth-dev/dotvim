@@ -145,7 +145,7 @@ set shortmess+=I
 
 " show search counts
 set shortmess-=S
-if exists('&maxsearchcount')
+if exists('+maxsearchcount')
     set maxsearchcount=300
 endif
 
